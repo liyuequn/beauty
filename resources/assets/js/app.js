@@ -12,7 +12,7 @@ import locale from 'element-ui/lib/locale/lang/en'
 import '../sass/element-variables.scss'
 Vue.use(VueRouter)
 Vue.use(Element, { locale },{ size: 'small' })
-
+// console.log(routes)
 // 3. 创建 router 实例，然后传 `routes` 配置
 const router = new VueRouter({
     routes // （缩写）相当于 routes: routes

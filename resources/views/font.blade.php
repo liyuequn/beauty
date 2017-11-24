@@ -8,9 +8,15 @@
     <!-- CSRF Token -->
     <meta name="csrf-token"  content="{{ csrf_token() }}">
     <title>beauty-font</title>
+    <style>
+        html,body{
+            margin:0px;
+            height:100%;
+        }
+    </style>
 </head>
 <body>
-        <div id="app">
+        <div id="app" style="height:100%;">
             <router-view></router-view>
         </div>
         <script src="{{ asset('js/app.js') }}"></script>
