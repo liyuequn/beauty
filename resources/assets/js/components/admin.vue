@@ -29,25 +29,21 @@
                         :key="index"
                         :router="true"
                 >
-                    <el-submenu :index="item.path" v-if="item.hidden">
+                    <el-submenu :index="item.path" v-if="!item.hidden">
                         <template slot="title">
                             <i class="el-icon-message"></i>
                             <span slot="title">{{item.name}}</span>
                         </template>
                         <el-menu-item-group v-for="(item2,index2) in item.children" :key="index2">
-                            <el-menu-item :index="item2.path">{{item2.name}}</el-menu-item>
+                            <el-menu-item v-if="!item2.hidden" :index="item2.path">{{item2.name}}</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                 </el-menu>
             </div>
             <el-main>
-                <el-breadcrumb separator="/">
-                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                    <el-breadcrumb-item :to="{ path: item.path }" v-for="item in $route.matched" :key="item.path">
-                        {{ item.name }}
-                    </el-breadcrumb-item>
-                </el-breadcrumb>
-                <router-view></router-view>
+                <transition name="fade">
+                    <router-view></router-view>
+                </transition>
             </el-main>
         </el-container>
     </el-container>
@@ -77,7 +73,8 @@
             return {
                 tableData: Array(20).fill(item),
                 collapse:false,
-                sysUserAvatar:'../../images/default.jpg',
+//                sysUserAvatar:'../../images/default.jpg',
+                sysUserAvatar:'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80',
                 sysUserName:'beauty',
             }
         },
