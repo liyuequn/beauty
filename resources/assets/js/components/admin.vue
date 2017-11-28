@@ -14,7 +14,7 @@
                     <span class="el-dropdown-link userinfo-inner"><img :src="this.sysUserAvatar" /> {{sysUserName}}</span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item>查看</el-dropdown-item>
-                        <el-dropdown-item>退出登录</el-dropdown-item>
+                        <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
@@ -79,7 +79,22 @@
             }
         },
         methods:{
+            logout(){
+                this.$confirm('退出, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    sessionStorage.removeItem('access_token');
+                    this.$message({
+                        type: 'success',
+                        message: '成功!'
+                    });
+                    this.$router.push('/login');
+                }).catch(() => {
 
+                });
+            }
         },
         mounted(){
             //console.log(this.$router.options.routes)

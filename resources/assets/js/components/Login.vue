@@ -45,44 +45,37 @@
                 this.$refs.ruleForm2.validate((valid) => {
                     if (valid) {
                         this.logining = true;
-                        var loginParams = { email: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-                        requestLogin(loginParams).then(data => {
-
-                            this.logining = false;
-                            //NProgress.done();
-                            let { msg, code, user } = data;
-                            //console.log(msg,code,user)
-                            if (code !== 200) {
-                                this.$message({
-                                    message: msg,
-                                    type: 'error'
-                                });
-                            } else {
-                                sessionStorage.setItem('user', JSON.stringify(user));
-                                let para = {};
-                                var _this = this
-                                getPermissionList(para).then(function(res){
-                                    sessionStorage.removeItem('permission');
-                                    sessionStorage.setItem('permission', JSON.stringify(res.data));
-                                    if(res){
-                                        _this.$router.push({ path: '/purchaseContract' });
-                                        //console.log(this.$router.options.routes = routes);
-                                        window.location.reload()
-                                    }
-                                });
-
-                            }
+                        var data={
+                                'grant_type':'password',
+                                'client_id':'4',
+                                'client_secret':'8bNEEAPGgt2weaHOa6fWesRDV2BySeM0A8Dl8qDS',
+                                'username':this.ruleForm2.account,
+                                'password':this.ruleForm2.checkPass,
+                                'scope':''
+                        };
+                        axios.post('/oauth/token', data).then(function (response) {
+                            sessionStorage.setItem('access_token',response.data.access_token)
+                            sessionStorage.setItem('refresh_token',response.data.refresh_token)
+                            sessionStorage.setItem('token_type',response.data.token_type)
+                            _this.$message({
+                                showClose: true,
+                                message: '登录成功',
+                                type: 'success'
+                            });
+                            _this.logining = false;
+                            _this.$router.push('/');
+                        }).catch(function (error) {
+                            console.log(error);
+                            _this.$message.error('密码错误');
+                            _this.logining = false;
                         });
-                    } else {
-                        this.$message({
-                            message: '连接超时',
-                            type: 'error'
-                        });
-                        return false;
                     }
                 });
             }
         },
+        mounted(){
+
+        }
     }
 
 </script>

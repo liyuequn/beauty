@@ -12,6 +12,12 @@ let routes = [
         hidden: true
     },
     {
+        path: '/passport',
+        component: require('./components/passport.vue'),
+        name: '',
+        hidden: true
+    },
+    {
         path: '/',
         name:'权限管理',
         component: require('./components/admin.vue'),

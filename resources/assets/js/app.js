@@ -12,8 +12,18 @@ const router = new VueRouter({
     routes
 })
 router.beforeEach((to, from, next) => {
-    // ...
-    next();
+
+    const access_token = sessionStorage.getItem('access_token');
+    // console.log(!access_token)
+    if (to.path == '/login') {
+        sessionStorage.removeItem('access_token');
+    }
+    if( !access_token && to.path != '/login' ) {
+        next('/login');
+     } else{
+         next();
+     }
+
 })
 const app = new Vue({
     router
