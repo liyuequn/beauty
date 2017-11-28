@@ -16,4 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::middleware('auth:api')->get('/test','TestController@index');
+Route::middleware('auth:api')->get('/users',function (){
+    return new \App\Http\Resources\UserCollection(\App\User::all());
+});

@@ -3,7 +3,7 @@
             :data="tableData"
             style="width: 100%">
         <el-table-column
-                prop="date"
+                prop="create_at"
                 label="日期"
                 width="180">
         </el-table-column>
@@ -13,8 +13,8 @@
                 width="180">
         </el-table-column>
         <el-table-column
-                prop="address"
-                label="地址">
+                prop="email"
+                label="邮箱">
         </el-table-column>
         <el-table-column
                 fixed="right"
@@ -36,23 +36,37 @@
         data() {
             return {
                 tableData: [{
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1517 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }]
+                    updated_at: '',
+                    created_at: '',
+                    name: '',
+                    email: ''
+                },]
             }
+        },
+        methods:{
+
+            getuser(){
+                var _this = this;
+
+                axios.get('/api/users').then((res)=>{
+
+                    _this.tableData = res.data.data;
+                    console.log(_this.tableData)
+
+                }).catch((error)=>{
+
+                    if(error.response.status!=200){
+                        _this.message('系统错误')
+                    }
+                })
+
+            },
+
+
+
+        },
+        mounted(){
+            this.getuser();
         }
     }
 </script>
