@@ -1,7 +1,8 @@
 <template>
     <div>
-        <div class="search-bar">
+
             <el-form :model="article" :rules="rules" ref="ruleForm">
+                <div class="search-bar">
                 <el-row :gutter="20">
                     <el-col :span="4">
                         <el-form-item prop="type">
@@ -34,6 +35,8 @@
                     <el-col :span="6">
                     </el-col>
                 </el-row>
+                </div>
+
                 <div class='simplemde-container' :style="{height:height+'px',zIndex:zIndex}">
                     <el-form-item prop="content">
                         <textarea :id='id' v-model="article.content">
@@ -41,7 +44,6 @@
                     </el-form-item>
                 </div>
             </el-form>
-        </div>
 
         <div class="btn-post" style="position: fixed;right:20px;bottom: 100px;z-index:2;">
             <el-button type="primary" @click="save()" :loading="saveLoading" plain>保存</el-button>
@@ -84,11 +86,13 @@
         },
         data() {
             return {
+                time_now:'',
                 article:{
                     post_at:'',
                     title:'',
                     type:'',
                     content:'',
+                    author_id:'',
                 },
                 userInfo:{},
                 options:[
@@ -100,14 +104,15 @@
                 saveLoading:false,
                 ruleForm: {
                     title: '',
-                    type: ''
+                    type: '',
+                    content:'',
                 },
                 rules: {
                     title: [
                         { required: true, message: '请输入标题', trigger: 'blur' },
                     ],
                     type: [
-                        { required: true, message: '请选择文章类型', trigger: 'blur' },
+                        {type:'number',required: true, message: '请选择文章类型', trigger: 'blur' },
                     ],
                     content: [
                         { required: true, message: '文章内容不能为空', trigger: 'blur' },
@@ -120,20 +125,17 @@
                console.log(val)
             },
             save(){
+
+                this.article.content=this.simplemde.value();
                 this.$refs.ruleForm.validate((valid) => {
                     if(valid){
                         var _this = this;
                         this.saveLoading = true;
-                        let params = {
-                            content:this.article.content,
-                            title:this.article.title,
-                            type:this.article.type,
-                            author_id:this.userInfo.id,
-                            post_at:this.article.post_at,
-                        }
+                        let params = this.article;
                         axios.post('/api/articles',params).then((res)=>{
                             if(res.status==200){
                                 this.saveLoading = false;
+                                this.article = res.data;
                                 _this.$message({
                                     showClose: true,
                                     message: '保存成功',
@@ -163,6 +165,18 @@
         },
         mounted() {
             this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+            this.article.author_id = this.userInfo.id;
+            var time = new Date();
+            var month = time.getMonth()+1;
+            this.article.post_at =
+                time.getFullYear()+'-'+
+                month +'-'+
+                time.getDate()+' '+
+                time.getHours()+':'+
+                time.getMinutes()+':'+
+                time.getSeconds();
+            console.log(this.article.post_at)
+
             this.simplemde = new SimpleMDE({
                 element: document.getElementById(this.id),
                 autofocus: this.autofocus,
@@ -183,6 +197,8 @@
                 }
                 this.$emit('input', this.simplemde.value())
             })
+
+
         },
         destroyed() {
             this.simplemde = null
@@ -217,8 +233,11 @@
         color: #E61E1E;
     }
     .search-bar{
-        width:100%;height:64px;background-color:#F4F9FF;display:block;
+        width:100%;height:64px;
+        background-color:#F4F9FF;
+        display:block;
         padding-top: 20px;
+        padding-left: 20px;
         margin-bottom:20px;
     }
 </style>

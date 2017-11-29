@@ -46,12 +46,12 @@
                     if (valid) {
                         this.logining = true;
                         var data={
-//                                'client_id':'1',
-//                                'client_secret':'ssaXJ5CLJeUgfwsKFnoCtQcmrDuznAkN9Uo8uQ62',
+                                'client_id':'1',
+                                'client_secret':'ssaXJ5CLJeUgfwsKFnoCtQcmrDuznAkN9Uo8uQ62',
 
                                 'grant_type':'password',
-                                'client_id':'4',
-                                'client_secret':'8bNEEAPGgt2weaHOa6fWesRDV2BySeM0A8Dl8qDS',
+//                                'client_id':'4',
+//                                'client_secret':'8bNEEAPGgt2weaHOa6fWesRDV2BySeM0A8Dl8qDS',
                                 'username':this.ruleForm2.account,
                                 'password':this.ruleForm2.checkPass,
                                 'scope':''

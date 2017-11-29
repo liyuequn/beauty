@@ -52,7 +52,7 @@
 
 
 <style>
-    .el-main{background-color: #F4F9FF}
+    /*.el-main{background-color: #F4F9FF}*/
     .el-header {  background-color: #46A0FC;  color: white;  line-height: 60px; padding:0px; }
     .aside{color: #333;background-color:#EEF1F6;width:200px;}
     .aside-collapse{color: #333;background-color:#EEF1F6;width:64px;}

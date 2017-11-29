@@ -21,7 +21,7 @@ class CreateArticlesTable extends Migration
             $table->text('content');
             $table->tinyInteger('type');
             $table->dateTime('post_at')->comment('发表时间');
-            $table->dateTime('last_comment_at')->comment('评论时间')->default(0);
+            $table->dateTime('last_comment_at')->comment('评论时间')->nullable();
             $table->tinyInteger('post_status')->comment('发表状态')->default(0);
             $table->integer('hits')->comment('点击数')->default(0);
             $table->tinyInteger('isTop')->comment('是否置顶')->default(0);

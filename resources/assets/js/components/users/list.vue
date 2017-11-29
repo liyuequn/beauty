@@ -1,5 +1,6 @@
 <template>
     <el-table
+            v-loading="loading"
             :data="tableData"
             style="width: 100%">
         <el-table-column
@@ -35,6 +36,7 @@
     export default {
         data() {
             return {
+                loading:false,
                 tableData: [{
                     updated_at: '',
                     created_at: '',
@@ -46,9 +48,11 @@
         methods:{
 
             getuser(){
+                this.loading = true;
                 var _this = this;
                 axios.get('/api/users').then((res)=>{
                     _this.tableData = res.data.data;
+                    this.loading = false;
                 }).catch((error)=>{
                     if(error.response.status!=200){
                         _this.message('系统错误')

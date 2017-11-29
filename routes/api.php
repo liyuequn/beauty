@@ -20,4 +20,7 @@ Route::middleware('auth:api')->get('/users',function (){
     return new \App\Http\Resources\UserCollection(\App\User::all());
 });
 Route::middleware('auth:api')->post('/articles','ArticlesController@store');
+Route::middleware('auth:api')->get('/articles',function (){
+    return new \App\Http\Resources\ArticleCollection(\App\Article::all());
+});
 
