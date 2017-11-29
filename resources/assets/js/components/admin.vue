@@ -28,6 +28,7 @@
                         v-for="(item,index) in $router.options.routes"
                         :key="index"
                         :router="true"
+                        :default-active="$route.path"
                 >
                     <el-submenu :index="item.path" v-if="!item.hidden">
                         <template slot="title">
@@ -51,6 +52,7 @@
 
 
 <style>
+    .el-main{background-color: #F4F9FF}
     .el-header {  background-color: #46A0FC;  color: white;  line-height: 60px; padding:0px; }
     .aside{color: #333;background-color:#EEF1F6;width:200px;}
     .aside-collapse{color: #333;background-color:#EEF1F6;width:64px;}
@@ -97,7 +99,11 @@
             }
         },
         mounted(){
-            //console.log(this.$router.options.routes)
+            //getUserInfo
+            axios.get('/api/user').then((res)=>{
+                sessionStorage.setItem('userInfo',JSON.stringify(res.data));
+                this.sysUserName = res.data.name;
+            })
         }
 
 

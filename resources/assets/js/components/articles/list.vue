@@ -1,5 +1,35 @@
+<style>
+    .search-bar{
+        width:100%;height:64px;background-color:#F4F9FF;display:block;
+        padding-top: 20px;padding-left:20px;
+        margin-bottom:20px;
+    }
+</style>
 <template>
     <section>
+        <div class="search-bar">
+            <el-row :gutter="20">
+                <el-col :span="4">
+                    <el-select v-model="type" placeholder="文章分类">
+                        <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-col>
+                <el-col :span="5">
+                    <el-input v-model="title" placeholder="标题"></el-input>
+                </el-col>
+                <el-col :span="6">
+                    <el-button type="primary" plain>搜索</el-button>
+                    <el-button type="primary" plain @click="$router.push('/articles/write')">写文章</el-button>
+                </el-col>
+                <el-col :span="6">
+                </el-col>
+            </el-row>
+        </div>
         <el-table
                 :data="tableData"
                 style="width: 100%">
@@ -45,6 +75,12 @@
     export default {
         data() {
             return {
+                title:'',
+                type:'',
+                options:[
+                    {value:1,label:'技术'},
+                    {value:2,label:'生活'},
+                ],
                 tableData: [
                     {
                     date: '2016-05-02',

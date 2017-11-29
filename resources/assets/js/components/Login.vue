@@ -46,10 +46,12 @@
                     if (valid) {
                         this.logining = true;
                         var data={
+//                                'client_id':'1',
+//                                'client_secret':'ssaXJ5CLJeUgfwsKFnoCtQcmrDuznAkN9Uo8uQ62',
+
                                 'grant_type':'password',
-                                'client_id':'1',
-                                'client_secret':'ssaXJ5CLJeUgfwsKFnoCtQcmrDuznAkN9Uo8uQ62',
-//                                'client_secret':'8bNEEAPGgt2weaHOa6fWesRDV2BySeM0A8Dl8qDS',
+                                'client_id':'4',
+                                'client_secret':'8bNEEAPGgt2weaHOa6fWesRDV2BySeM0A8Dl8qDS',
                                 'username':this.ruleForm2.account,
                                 'password':this.ruleForm2.checkPass,
                                 'scope':''
@@ -64,16 +66,14 @@
                                 type: 'success'
                             });
                             _this.logining = false;
-                            _this.$router.push('/');
+                            _this.$router.push('/index');
                         }).catch(function (error) {
                             if(error.response.status==500){
                                 _this.$message.error('系统错误');
-
                             }else if(error.response.status==401){
                                 _this.$message.error('密码错误');
                             }else{
                                 _this.$message.error('错误未知');
-
                             }
                             _this.logining = false;
                         });

@@ -33,7 +33,8 @@ let routes = [
         hidden:false,
         children:[
             {path: '/articles_list', name:'文章', component: require('./components/articles/list.vue'),},
-            { path: '/articles/:id', name:'编辑', component: require('./components/articles/edit.vue'),hidden:true}
+            { path: '/articles/write', name:'写文章', component: require('./components/articles/edit.vue'),hidden:true},
+            { path: '/articles/:id', name:'编辑', component: require('./components/articles/edit.vue'),hidden:true},
         ]
     },
 ]

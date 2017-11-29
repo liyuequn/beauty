@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware('auth:api')->get('/users',function (){
     return new \App\Http\Resources\UserCollection(\App\User::all());
 });
+Route::middleware('auth:api')->post('/articles','ArticlesController@store');
+

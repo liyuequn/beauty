@@ -1,8 +1,54 @@
 <template>
-    <div class='simplemde-container' :style="{height:height+'px',zIndex:zIndex}">
-    <textarea :id='id'>
-    </textarea>
+    <div>
+        <div class="search-bar">
+            <el-form :model="article" :rules="rules" ref="ruleForm">
+                <el-row :gutter="20">
+                    <el-col :span="4">
+                        <el-form-item prop="type">
+                            <el-select v-model="article.type" placeholder="文章分类">
+                                <el-option
+                                        v-for="item in options"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="5">
+                        <el-form-item prop="title">
+                            <el-input v-model="article.title" placeholder="标题"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="6">
+                        <div class="block">
+                            <el-date-picker
+                                    v-model="article.post_at"
+                                    type="datetime"
+                                    @change="postAt"
+                                    value-format="yyyy-MM-dd HH:mm:ss"
+                                    placeholder="发表时间">
+                            </el-date-picker>
+                        </div>
+                    </el-col>
+                    <el-col :span="6">
+                    </el-col>
+                </el-row>
+                <div class='simplemde-container' :style="{height:height+'px',zIndex:zIndex}">
+                    <el-form-item prop="content">
+                        <textarea :id='id' v-model="article.content">
+                        </textarea>
+                    </el-form-item>
+                </div>
+            </el-form>
+        </div>
+
+        <div class="btn-post" style="position: fixed;right:20px;bottom: 100px;z-index:2;">
+            <el-button type="primary" @click="save()" :loading="saveLoading" plain>保存</el-button>
+            <el-button type="primary" plain>发表</el-button>
+        </div>
     </div>
+
 </template>
 
 <script>
@@ -38,8 +84,75 @@
         },
         data() {
             return {
+                article:{
+                    post_at:'',
+                    title:'',
+                    type:'',
+                    content:'',
+                },
+                userInfo:{},
+                options:[
+                    {value:1,label:'技术'},
+                    {value:2,label:'生活'},
+                ],
                 simplemde: null,
-                hasChange: false
+                hasChange: false,
+                saveLoading:false,
+                ruleForm: {
+                    title: '',
+                    type: ''
+                },
+                rules: {
+                    title: [
+                        { required: true, message: '请输入标题', trigger: 'blur' },
+                    ],
+                    type: [
+                        { required: true, message: '请选择文章类型', trigger: 'blur' },
+                    ],
+                    content: [
+                        { required: true, message: '文章内容不能为空', trigger: 'blur' },
+                    ],
+                },
+            }
+        },
+        methods:{
+            postAt(val){
+               console.log(val)
+            },
+            save(){
+                this.$refs.ruleForm.validate((valid) => {
+                    if(valid){
+                        var _this = this;
+                        this.saveLoading = true;
+                        let params = {
+                            content:this.article.content,
+                            title:this.article.title,
+                            type:this.article.type,
+                            author_id:this.userInfo.id,
+                            post_at:this.article.post_at,
+                        }
+                        axios.post('/api/articles',params).then((res)=>{
+                            if(res.status==200){
+                                this.saveLoading = false;
+                                _this.$message({
+                                    showClose: true,
+                                    message: '保存成功',
+                                    type: 'success'
+                                })
+                            }
+                        }).catch((error)=>{
+                            this.saveLoading = false;
+                            _this.$message({
+                                showClose: true,
+                                message:'error',
+                                type: 'error'
+                            })
+                        })
+                    }
+                })
+            },
+            submit(){
+
             }
         },
         watch: {
@@ -49,6 +162,7 @@
             }
         },
         mounted() {
+            this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
             this.simplemde = new SimpleMDE({
                 element: document.getElementById(this.id),
                 autofocus: this.autofocus,
@@ -101,6 +215,11 @@
         padding: 0 2px;
         font-weight: bold;
         color: #E61E1E;
+    }
+    .search-bar{
+        width:100%;height:64px;background-color:#F4F9FF;display:block;
+        padding-top: 20px;
+        margin-bottom:20px;
     }
 </style>
 

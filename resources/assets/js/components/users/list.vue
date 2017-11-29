@@ -3,7 +3,7 @@
             :data="tableData"
             style="width: 100%">
         <el-table-column
-                prop="create_at"
+                prop="created_at"
                 label="日期"
                 width="180">
         </el-table-column>
@@ -47,19 +47,13 @@
 
             getuser(){
                 var _this = this;
-
                 axios.get('/api/users').then((res)=>{
-
                     _this.tableData = res.data.data;
-                    console.log(_this.tableData)
-
                 }).catch((error)=>{
-
                     if(error.response.status!=200){
                         _this.message('系统错误')
                     }
                 })
-
             },
 
 
