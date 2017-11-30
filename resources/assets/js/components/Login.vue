@@ -48,8 +48,12 @@
                         var data={
                                 'username':this.ruleForm2.account,
                                 'password':this.ruleForm2.checkPass,
+                                'grant_type':'password',
+                                'client_secret':"ssaXJ5CLJeUgfwsKFnoCtQcmrDuznAkN9Uo8uQ62",
+                                'client_id':1,
+                                'scope':'',
                         };
-                        axios.post('/test/test', data).then(function (response) {
+                        axios.post('/oauth/token', data).then(function (response) {
                             sessionStorage.setItem('access_token',response.data.access_token)
                             sessionStorage.setItem('refresh_token',response.data.refresh_token)
                             sessionStorage.setItem('token_type',response.data.token_type)

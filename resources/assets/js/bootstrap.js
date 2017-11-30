@@ -23,8 +23,7 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.headers.common['Accept'] = 'application/json';
-const access_token = sessionStorage.getItem('access_token');
-window.axios.defaults.headers.common['Authorization'] = 'Bearer '+access_token;
+
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
