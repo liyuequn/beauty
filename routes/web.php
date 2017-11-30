@@ -14,6 +14,8 @@
 Route::get('/', function () {
     return view('font');
 });
+Route::post('/test','TestController@index');
+Route::post('/test/test','TestController@test');
 Route::get('/admin', function () {
     return view('welcome');
 });
