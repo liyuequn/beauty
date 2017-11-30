@@ -20,7 +20,12 @@ Route::middleware('auth:api')->get('/users',function (){
     return new \App\Http\Resources\UserCollection(\App\User::all());
 });
 Route::middleware('auth:api')->post('/articles','ArticlesController@store');
-Route::middleware('auth:api')->get('/articles',function (){
-    return new \App\Http\Resources\ArticleCollection(\App\Article::all());
+Route::middleware('auth:api')->get('/articles/{id}', function ($id) {
+    return \App\Article::find($id);
 });
+Route::middleware('auth:api')->delete('/articles/{id}', function ($id) {
+     \App\Article::find($id)->delete();
+});
+Route::middleware('auth:api')->get('/articles','ArticlesController@index');
+
 

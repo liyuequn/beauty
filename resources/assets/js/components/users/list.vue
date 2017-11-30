@@ -55,7 +55,7 @@
                     this.loading = false;
                 }).catch((error)=>{
                     if(error.response.status!=200){
-                        _this.message('系统错误')
+                        _this.$message('系统错误')
                     }
                 })
             },

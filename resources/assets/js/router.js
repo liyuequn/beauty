@@ -32,9 +32,10 @@ let routes = [
         component: require('./components/admin.vue'),
         hidden:false,
         children:[
-            {path: '/articles_list', name:'文章', component: require('./components/articles/list.vue'),},
+            {path: '/articles', name:'文章', component: require('./components/articles/list.vue'),},
             { path: '/articles/write', name:'写文章', component: require('./components/articles/edit.vue'),hidden:true},
-            { path: '/articles/:id', name:'编辑', component: require('./components/articles/edit.vue'),hidden:true},
+            { path: '/articles/:id', name:'查看', component: require('./components/articles/detail.vue'),hidden:true},
+            { path: '/article/:id', name:'编辑', component: require('./components/articles/edit.vue'),hidden:true},
         ]
     },
 ]

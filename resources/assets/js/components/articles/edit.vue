@@ -1,6 +1,5 @@
 <template>
     <div>
-
             <el-form :model="article" :rules="rules" ref="ruleForm">
                 <div class="search-bar">
                 <el-row :gutter="20">
@@ -26,7 +25,6 @@
                             <el-date-picker
                                     v-model="article.post_at"
                                     type="datetime"
-                                    @change="postAt"
                                     value-format="yyyy-MM-dd HH:mm:ss"
                                     placeholder="发表时间">
                             </el-date-picker>
@@ -47,7 +45,7 @@
 
         <div class="btn-post" style="position: fixed;right:20px;bottom: 100px;z-index:2;">
             <el-button type="primary" @click="save()" :loading="saveLoading" plain>保存</el-button>
-            <el-button type="primary" plain>发表</el-button>
+            <el-button type="primary" @click="submit()" :loading="submitLoading" plain>发表</el-button>
         </div>
     </div>
 
@@ -102,6 +100,7 @@
                 simplemde: null,
                 hasChange: false,
                 saveLoading:false,
+                submitLoading:false,
                 ruleForm: {
                     title: '',
                     type: '',
@@ -121,11 +120,7 @@
             }
         },
         methods:{
-            postAt(val){
-               console.log(val)
-            },
             save(){
-
                 this.article.content=this.simplemde.value();
                 this.$refs.ruleForm.validate((valid) => {
                     if(valid){
@@ -154,7 +149,40 @@
                 })
             },
             submit(){
-
+                this.article.content=this.simplemde.value();
+                this.$refs.ruleForm.validate((valid) => {
+                    if(valid){
+                        var _this = this;
+                        this.submitLoading = true;
+                        let params = this.article;
+                        axios.post('/api/articles',params).then((res)=>{
+                            if(res.status==200){
+                                this.submitLoading = false;
+                                this.article = res.data;
+                                _this.$message({
+                                    showClose: true,
+                                    message: '成功',
+                                    type: 'success'
+                                })
+                                this.$router.push('/articles/'+this.article.id)
+                            }
+                        }).catch((error)=>{
+                            console.log(error)
+                            this.submitLoading = false;
+                            _this.$message({
+                                showClose: true,
+                                message:'error',
+                                type: 'error'
+                            })
+                        })
+                    }
+                })
+            },
+            detail(){
+                axios.get('/api/articles/'+this.$route.params.id).then((res)=>{
+                    this.article = res.data;
+                    this.simplemde.value(res.data.content);
+                })
             }
         },
         watch: {
@@ -175,7 +203,6 @@
                 time.getHours()+':'+
                 time.getMinutes()+':'+
                 time.getSeconds();
-            console.log(this.article.post_at)
 
             this.simplemde = new SimpleMDE({
                 element: document.getElementById(this.id),
@@ -197,11 +224,14 @@
                 }
                 this.$emit('input', this.simplemde.value())
             })
+            if(this.$route.params.id){
+                this.detail();
+            }
 
 
         },
         destroyed() {
-            this.simplemde = null
+            this.simplemde = null;
         }
     }
 </script>

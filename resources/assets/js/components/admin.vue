@@ -22,7 +22,7 @@
         <el-container>
             <div :class="collapse?'aside-collapse':'aside'">
                 <el-menu
-                        background-color="#EEF1F6"
+                        background-color="#F4F9FF"
                         active-text-color="#46A0FC"
                         :collapse="collapse"
                         v-for="(item,index) in $router.options.routes"
@@ -54,8 +54,8 @@
 <style>
     /*.el-main{background-color: #F4F9FF}*/
     .el-header {  background-color: #46A0FC;  color: white;  line-height: 60px; padding:0px; }
-    .aside{color: #333;background-color:#EEF1F6;width:200px;}
-    .aside-collapse{color: #333;background-color:#EEF1F6;width:64px;}
+    .aside{color: #333;background-color:#F4F9FF;width:200px;}
+    .aside-collapse{color: #333;background-color:#F4F9FF;width:64px;}
     .el-menu{border: 0px;}
     .el-submenu .el-menu{margin-left:0px!important;}
     .el-menu-item-group__title{padding:0px;}
