@@ -14,9 +14,11 @@
 Route::get('/backend', function () {
     return view('font');
 });
-Route::get('/index', function () {
-    return view('index');
-});
+//Route::get('/', function () {
+//    return view('index');
+//});
+Route::get('/', 'IndexController@index');
+
 Route::get('/admin', function () {
     return view('welcome');
 });

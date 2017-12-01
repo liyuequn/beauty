@@ -29,4 +29,9 @@ class Article extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public function user(){
+
+        return $this->belongsTo('App\User','author_id');
+    }
 }
