@@ -67,12 +67,12 @@
     }
 </style>
 @extends('layouts.app')
-@section('title', 'Index')
+@section('title', $article->title)
 @section('content')
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-        <h1>新女性：美是底线，钱是底气，野心是底蕴！</h1>
+        <h1>{{$article->title}}</h1>
         <div class="author">
             <a class="avatar" href="/u/802c88dbbc05">
                 <img src="//upload.jianshu.io/users/upload_avatars/1931381/71a4c916-0559-4bcc-8153-8ba87c751110.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="96">
