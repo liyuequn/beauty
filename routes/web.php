@@ -12,13 +12,10 @@
 */
 
 Route::get('/backend', function () {
-    return view('font');
+    return view('backend');
 });
-//Route::get('/', function () {
-//    return view('index');
-//});
 Route::get('/', 'IndexController@index');
+Route::get('/p/{id}','ArticlesController@detail');
+Route::post('/login','Auth\LoginController@login');
+Route::post('/test','TestController@index');
 
-Route::get('/admin', function () {
-    return view('welcome');
-});

@@ -45,4 +45,14 @@ class ArticlesController extends Controller
         return $articles;
     }
 
+    /**
+     *
+     */
+    public function detail($id){
+        $article = Article::find($id);
+        $Parsedown = new \Parsedown();
+        $article->content =  $Parsedown->text($article->content);
+        return view('article.index',['article'=>$article]);
+    }
+
 }

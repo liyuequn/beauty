@@ -14,7 +14,7 @@ class IndexController extends Controller
     public function index(){
         $where = [];
 
-        $articles = Article::where($where)->take(10)->get();
+        $articles = Article::where($where)->take(20)->get();
 
 
         return view('index',['articles'=>$articles]);
