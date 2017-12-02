@@ -13,10 +13,7 @@ class IndexController extends Controller
      */
     public function index(){
         $where = [];
-
-        $articles = Article::where($where)->take(20)->get();
-
-
+        $articles = Article::where($where)->take(20)->orderBy('post_at','desc')->get();
         return view('index',['articles'=>$articles]);
     }
 }
