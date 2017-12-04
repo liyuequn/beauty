@@ -6,7 +6,9 @@
     .article .nickname{margin-left:10px;color: #333;font-size: 16px;}
     .article .footer .tab{background-color: white;border-color: hotpink;}
     .article .footer {margin-top: 8px;}
-    .article .thmub {margin-top: 18px;}
+    .article .thmub {margin-top: 18px;float: right;}
+    .article .col-md-8 {padding: 0;}
+    .article .col-md-4 {padding-right: 0;}
     .right-15{margin-right: 15px;}
 </style>
 @extends('layouts.app')
@@ -43,7 +45,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-4 visible-lg-* hidden-xs  hidden-sm" style="background-color: #66afe9;height:300px;">
+        <div class="col-md-4 visible-lg-* hidden-xs  hidden-sm">
 
         </div>
 
@@ -52,7 +54,7 @@
         <div class="col-md-8">
             @foreach ($articles as $article)
             <div class="article">
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <img width="40" src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" class="img-circle" alt="">
                     <a href="" class="nickname">{{$article->user->name}}</a>
                     <span style="margin-left:10px;">{{$article->post_at}}</span>
@@ -60,7 +62,7 @@
                         {{$article->title}}
                     </a>
                     <div class="abstract">
-                        {{mb_substr($article->content,0,206)}}
+                        {{ mb_substr($article->content,0,206) }}
                         {{mb_strlen($article->content)>206?'...':''}}
                     </div>
                     <div class="footer">
@@ -78,14 +80,14 @@
                         <span class="right-15">10000</span>
                     </div>
                 </div>
-                <div class="col-md-3 hidden-xs">
-                    <img class="thmub" width="150" src="//upload-images.jianshu.io/upload_images/2206395-3e9a3800e9195ea1.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="">
+                <div class="col-md-4 hidden-xs">
+                    <img class="thmub"  width="150" src="//upload-images.jianshu.io/upload_images/2206395-3e9a3800e9195ea1.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="">
                 </div>
             </div>
                 @endforeach
 
         </div>
-        <div class="col-md-4 visible-lg-* hidden-xs  hidden-sm" style="background-color: #66afe9;height: 500px;">
+        <div class="col-md-4 visible-lg-* hidden-xs  hidden-sm">
 
         </div>
     </div>

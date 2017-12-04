@@ -14,6 +14,10 @@ class IndexController extends Controller
     public function index(){
         $where = [];
         $articles = Article::where($where)->take(20)->orderBy('post_at','desc')->get();
+        $parseDown = new \Parsedown();
+        foreach ($articles as $article){
+            $article->content =strip_tags($parseDown->text($article->content));
+        }
         return view('index',['articles'=>$articles]);
     }
 }
