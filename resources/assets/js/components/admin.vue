@@ -1,5 +1,5 @@
 <template>
-    <el-container style="height:100%; border: 1px solid #eee">
+    <el-container style="height:100%; border: 1px solid #eee;">
         <el-header style="text-align: right; font-size: 12px">
             <div v-show="!collapse" style="float: left;font-size: 22px;text-align: center;width: 200px;border-right:1px solid gold; ">
                 <span >beauty</span>

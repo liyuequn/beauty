@@ -36,13 +36,10 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->input('id')){
-             DB::table('articles')->where('id',$request->input('id'))->update($request->all());
-            $articles = Article::find($request->input('id'));
-        }else{
-            $articles = Article::create($request->all());
-        }
+        $articles = Article::firstOrCreate(['id'=>$request->input('id')]);
+        $articles->update($request->all());
         return $articles;
+
     }
 
     /**

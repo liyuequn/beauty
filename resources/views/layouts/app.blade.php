@@ -11,10 +11,6 @@
     <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/vue"></script>
-    <!-- Add this after vue.js -->
-    <script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
-    <script src="//unpkg.com/tether@latest/dist/js/tether.min.js"></script>
-    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
     <title>@yield('title')</title>
     <style>
         .navbar-brand{border: 1px solid #f0f0f0;height: 66px!important;position: fixed;top:0;z-index:2;background-color: white;  }
@@ -35,17 +31,6 @@
                 <a href="javascript:;" class="btn btn-primary login" @click="login">登录</a>
                 <a href="javascript:;" class="btn btn-primary register" @click="register">注册</a>
             </div>
-            <!-- Modal Component -->
-            <b-modal ref="my_modal" id="modal1" title="登录" @ok="submit" @shown="clearName">
-                <form @submit.stop.prevent="submit">
-                    <b-input-group left="用户">
-                        <b-form-input type="text" placeholder="输入用户名" v-model="name"></b-form-input>
-                    </b-input-group>
-                    <b-input-group left="密码">
-                        <b-form-input type="password" placeholder="输入密码" v-model="password"></b-form-input>
-                    </b-input-group>
-                </form>
-            </b-modal>
         </header>
     @show
     <div class="container" style="margin-top: 66px;">
@@ -61,17 +46,6 @@
             },
             methods:{
                 login(){
-                    this.$refs.my_modal.show();
-                },
-                clearName() {
-                    this.name = '';
-                    this.password = '';
-                },
-                submit(e) {
-                    if (!this.name) {
-                        alert('Please enter your name');
-                        return e.cancel();
-                    }
                 },
                 register(){
 

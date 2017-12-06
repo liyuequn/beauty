@@ -18,6 +18,12 @@ let routes = [
         hidden: true
     },
     {
+        path: '/custom',
+        component: require('./components/components/custom.vue'),
+        name: '定制组件',
+        hidden: true
+    },
+    {
         path: '/',
         name:'权限管理',
         component: require('./components/admin.vue'),
