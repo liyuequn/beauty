@@ -42,6 +42,9 @@ let routes = [
             { path: '/articles/write', name:'写文章', component: require('./components/articles/edit.vue'),hidden:true},
             { path: '/articles/:id', name:'查看', component: require('./components/articles/detail.vue'),hidden:true},
             { path: '/article/:id', name:'编辑', component: require('./components/articles/edit.vue'),hidden:true},
+            {path: '/types', name:'文章类型', component: require('./components/type/list.vue')},
+
+
         ]
     },
 ]
