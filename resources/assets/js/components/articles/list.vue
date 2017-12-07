@@ -9,8 +9,8 @@
     <section>
         <div class="search-bar">
             <el-row :gutter="20">
-                <el-col :span="4">
-                    <el-select v-model="type" placeholder="文章分类" @change="getList()">
+                <el-col :span="5">
+                    <el-select style="width: 100%" v-model="type" placeholder="文章分类" @change="getList()">
                         <el-option
                                 v-for="item in options"
                                 :key="item.value"
@@ -42,7 +42,7 @@
             <el-table-column
                     prop="type"
                     label="类型"
-                    :formatter="typeformat"
+                    :formatter="typeName"
                     width="120">
             </el-table-column>
             <el-table-column
@@ -113,8 +113,6 @@
                 type:'',
                 options:[
                     {value:'',label:'全部'},
-                    {value:1,label:'技术'},
-                    {value:2,label:'生活'},
                 ],
                 tableData: [],
                 //page
@@ -124,7 +122,7 @@
             }
         },
         methods:{
-            typeformat(row,column){
+            typeName(row,column){
                 var res = '';
                 this.options.forEach((item,index)=>{
                     if(row.type==item.value){
@@ -148,6 +146,13 @@
                     this.tableData = res.data.data[0];
                     this.total = res.data.meta.total;
                     this.loading = false;
+                })
+            },
+            getTypeList(){
+                axios.get('/api/types').then((res)=>{
+                    res.data[0].forEach((item,index)=>{
+                        this.options.push({value:item.id,label:item.name});
+                    })
                 })
             },
             delete1(id){
@@ -177,6 +182,7 @@
         },
         mounted(){
             this.getList();
+            this.getTypeList();
         }
     }
 </script>

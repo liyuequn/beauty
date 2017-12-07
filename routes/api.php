@@ -27,5 +27,15 @@ Route::middleware('auth:api')->delete('/articles/{id}', function ($id) {
      \App\Article::find($id)->delete();
 });
 Route::middleware('auth:api')->get('/articles','ArticlesController@index');
+Route::middleware('auth:api')->post('/types','TypesController@store');
+Route::middleware('auth:api')->get('/types','TypesController@index');
+Route::middleware('auth:api')->delete('/types/{id}', function ($id) {
+    \App\Type::find($id)->delete();
+});
+Route::middleware('auth:api')->post('/labels','LabelsController@store');
+Route::middleware('auth:api')->get('/labels','LabelsController@index');
+Route::middleware('auth:api')->delete('/labels/{id}', function ($id) {
+    \App\Label::find($id)->delete();
+});
 
 

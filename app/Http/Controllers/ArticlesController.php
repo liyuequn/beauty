@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ArticlesController extends Controller
 {
@@ -36,10 +35,13 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
-        $articles = Article::firstOrCreate(['id'=>$request->input('id')]);
-        $articles->update($request->all());
+        if($request->input('id')){
+            $articles = Article::find($request->input('id'));
+            $articles->update($request->all());
+        }else{
+            $articles = Article::create($request->all());
+        }
         return $articles;
-
     }
 
     /**

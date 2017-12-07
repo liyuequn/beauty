@@ -3,9 +3,9 @@
             <el-form :model="article" :rules="rules" ref="ruleForm">
                 <div class="search-bar">
                 <el-row :gutter="20">
-                    <el-col :span="4">
+                    <el-col :span="5">
                         <el-form-item prop="type">
-                            <el-select v-model="article.type" placeholder="文章分类">
+                            <el-select style="width:100%;" v-model="article.type" placeholder="文章分类">
                                 <el-option
                                         v-for="item in options"
                                         :key="item.value"
@@ -86,6 +86,7 @@
             return {
                 time_now:'',
                 article:{
+                    id:null,
                     post_at:'',
                     title:'',
                     type:'',

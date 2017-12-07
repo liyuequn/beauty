@@ -10,11 +10,11 @@
         <div class="search-bar">
             <el-row :gutter="20">
                 <el-col :span="5">
-                    <el-input v-model="title" placeholder="类型" @keyup.enter.native="getList()" ></el-input>
+                    <el-input v-model="filter.name" placeholder="类型" @keyup.enter.native="getList()" ></el-input>
                 </el-col>
                 <el-col :span="6">
                     <el-button type="primary" plain @click="getList()">搜索</el-button>
-                    <el-button type="primary" plain @click="DialogVisible = true">添加类型</el-button>
+                    <el-button type="primary" plain @click="DialogVisible = true ;dialogTitle = '新增类型'">添加类型</el-button>
                 </el-col>
                 <el-col :span="6">
                 </el-col>
@@ -25,19 +25,18 @@
                 :data="tableData"
                 style="width: 100%">
             <el-table-column
-                    prop="post_at"
+                    prop="created_at"
                     label="创建日期"
                     width="180">
             </el-table-column>
             <el-table-column
-                    prop="type"
+                    prop="name"
                     label="类型"
                     width="120">
             </el-table-column>
             <el-table-column
                     prop="title"
-                    label="标签"
-                    width="180">
+                    label="标签">
             </el-table-column>
             <el-table-column
                     fixed="right"
@@ -45,17 +44,9 @@
                     width="220">
                 <template slot-scope="scope">
                     <el-button
-                            type="success"
-                            size="small"
-                            @click="$router.push('/articles/'+scope.row.id)"
-                            plain
-                    >
-                        查看
-                    </el-button>
-                    <el-button
                             type="primary"
                             size="small"
-                            @click="$router.push('/article/'+scope.row.id)"
+                            @click="editTypeShow(scope.row)"
                             plain
                     >
                         编辑
@@ -71,25 +62,13 @@
                 </template>
             </el-table-column>
         </el-table>
-        <div class="block" style="text-align: center;">
-            <el-pagination
-                    background="#F4F9FF"
-                    @size-change="handleSizeChange"
-                    @current-change="handleCurrentChange"
-                    :current-page="currentPage"
-                    :page-sizes="[10, 20, 50, 100]"
-                    :page-size="pageSize"
-                    layout="total, sizes, prev, pager, next, jumper"
-                    :total="total">
-            </el-pagination>
-        </div>
         <el-dialog
-                title="新增类型"
+                :title="dialogTitle"
                 :visible.sync="DialogVisible"
                 width="30%"
                 center>
 
-            <el-form :model="typeForm" ref="typeForm" :rule="rules">
+            <el-form :model="typeForm" ref="typeForm" :rules="rules">
                 <el-form-item  prop="name">
                     <el-input v-model="typeForm.name" auto-complete="off"></el-input>
                 </el-form-item>
@@ -108,22 +87,21 @@
         data() {
             return {
                 DialogVisible:false,
+                dialogTitle:'新增类型',
                 loading:false,
-                title:'',
-                type:'',
+                filter:{
+                  name:'',
+                },
                 options:[
                     {value:'',label:'全部'},
                     {value:1,label:'技术'},
                     {value:2,label:'生活'},
                 ],
                 tableData: [],
-                //page
-                total:0,
-                currentPage:1,
-                pageSize:10,
                 //addType
                 typeForm:{
-                    name:''
+                    name:'',
+                    author_id:0,
                 },
                 rules: {
                     name: [
@@ -136,25 +114,29 @@
             addType(formName){
                 this.$refs[formName].validate((valid) => {
                     if(valid){
-                        console.log(valid)
                         this.DialogVisible = false;
+                        axios.post('/api/types',this.typeForm).then((res)=>{
+                            this.$message.success('创建成功');
+                            this.getList();
+                        }).catch((error)=>{
+                            this.$message.error('创建失败,目标或已存在');
+                        })
                     }
                 })
             },
-            contentStr(row,cloumn){
-                return row.content.substring(0,100);
+            editTypeShow(row){
+                this.DialogVisible = true;
+                this.dialogTitle = '修改类型';
+                this.typeForm.name = row.name;
+                this.typeForm.id = row.id;
             },
             getList(){
                 this.loading = true;
                 let params = {
-                    type:this.type,
-                    title:this.title,
-                    page:this.currentPage,
-                    pageSize:this.pageSize,
+                    name:this.filter.name,
                 }
-                axios.get('/api/articles',{params}).then((res)=>{
-                    this.tableData = res.data.data[0];
-                    this.total = res.data.meta.total;
+                axios.get('/api/types',{params}).then((res)=>{
+                    this.tableData = res.data[0];
                     this.loading = false;
                 })
             },
@@ -164,7 +146,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then((res)=>{
-                    axios.delete('/api/articles/'+id).then((res)=>{
+                    axios.delete('/api/types/'+id).then((res)=>{
                         this.$message({
                             type: 'success',
                             message: '成功!'
@@ -174,17 +156,11 @@
 
                 })
             },
-            handleSizeChange(val){
-                this.pageSize = val;
-                this.getList();
-            },
-            handleCurrentChange(val){
-                this.currentPage = val;
-                this.getList();
-            }
         },
         mounted(){
             this.getList();
+            const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+            this.typeForm.author_id = userInfo.id;
         }
     }
 </script>

@@ -79,7 +79,6 @@
             </a>
             <div class="info">
                 <span class="name"><a href="/u/802c88dbbc05">{{$article->user->name}}</a></span>
-                <img class="badge-icon" data-toggle="tooltip" title="" src="//cdn2.jianshu.io/assets/badges/signed-9702260821906f0d953eab67a29f8e7a2d2e3d20960576347591283a3fbfd867.png" alt="Signed" data-original-title="简书签约作者">
                 <!-- 关注用户按钮 -->
                 <a class="btn btn-success follow"><i class="iconfont ic-follow"></i><span>关注</span></a>
                 <!-- 文章数据信息 -->
@@ -104,7 +103,6 @@
                     <img src="//upload.jianshu.io/users/upload_avatars/1931381/71a4c916-0559-4bcc-8153-8ba87c751110.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="96">
                 </a>
                 <a class="title" href="/u/802c88dbbc05">{{$article->user->name}}</a>
-                <img class="badge-icon" data-toggle="tooltip" title="" src="//cdn2.jianshu.io/assets/badges/signed-9702260821906f0d953eab67a29f8e7a2d2e3d20960576347591283a3fbfd867.png" alt="Signed" data-original-title="简书签约作者">
                 <span class="meta">写了 337295 字，被 15281 人关注，获得了 16785 个喜欢</span>
             </div>
             <div class="signature">

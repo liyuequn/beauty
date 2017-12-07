@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap@next/dist/css/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+    {{--<link rel="stylesheet" href="{{asset('css/github-markdown.css')}}">--}}
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="icon" href="{{asset('images/icon/Beauty.png')}}" type="image/x-icon"/>
     <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
