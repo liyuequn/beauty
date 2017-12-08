@@ -94,10 +94,7 @@
                     author_id:'',
                 },
                 userInfo:{},
-                options:[
-                    {value:1,label:'技术'},
-                    {value:2,label:'生活'},
-                ],
+                options:[],
                 simplemde: null,
                 hasChange: false,
                 saveLoading:false,
@@ -184,7 +181,14 @@
                     this.article = res.data;
                     this.simplemde.value(res.data.content);
                 })
-            }
+            },
+            getTypeList(){
+                axios.get('/api/types').then((res)=>{
+                    res.data[0].forEach((item,index)=>{
+                        this.options.push({value:item.id,label:item.name});
+                    })
+                })
+            },
         },
         watch: {
             value(val) {
@@ -195,6 +199,7 @@
         mounted() {
             this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
             this.article.author_id = this.userInfo.id;
+            this.getTypeList();
             var time = new Date();
             var month = time.getMonth()+1;
             this.article.post_at =
@@ -233,6 +238,7 @@
         },
         destroyed() {
             this.simplemde = null;
+
         }
     }
 </script>
