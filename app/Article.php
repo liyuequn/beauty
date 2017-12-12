@@ -34,4 +34,12 @@ class Article extends Model
 
         return $this->belongsTo('App\User','author_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * 获取该文章的多个标签
+     */
+    public function labels(){
+        return $this->belongsToMany('App\Label');
+    }
 }

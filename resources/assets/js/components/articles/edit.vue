@@ -20,6 +20,11 @@
                             <el-input v-model="article.title" placeholder="标题"></el-input>
                         </el-form-item>
                     </el-col>
+                    <el-col :span="5">
+                        <el-form-item prop="title">
+                            <el-input v-model="article.label" placeholder="标签,请以逗号,隔开"></el-input>
+                        </el-form-item>
+                    </el-col>
                     <el-col :span="6">
                         <div class="block">
                             <el-date-picker

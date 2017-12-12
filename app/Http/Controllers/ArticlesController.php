@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Article_label;
+use App\Label;
 use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
@@ -41,6 +43,15 @@ class ArticlesController extends Controller
         }else{
             $articles = Article::create($request->all());
         }
+        //1.对比标签，存储
+        $labels = explode(',',$request->input('label'));
+        $label_ids = [];
+        foreach ($labels as $label){
+            $label_ids[] = Label::firstOrCreate($label);
+        }
+        //2.标签文章关联表
+        Article_label::Create();
+
         return $articles;
     }
 

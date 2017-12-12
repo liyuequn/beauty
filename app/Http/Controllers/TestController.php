@@ -4,12 +4,34 @@ namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
     //
-    public function index(Request $request){
-        return $request->all();
+    public function index(){
+        set_time_limit(0);
+        //清空并关闭输出缓存
+        ob_end_clean();
+        //flush();
+        echo '<div id="jindu" style="height: 20px;background-color: greenyellow;z-index: 1000000;"></div>';
+        for ($j=1;$j<=100;$j++){
+            $jindu = $j*10;
+            echo '<script>
+                var jindu = document.getElementById("jindu");
+                jindu.style.width = "'.$jindu.'px";
+                jindu.innerHTML = "'.$j.'%";
+            </script>';
+            for ($i=0;$i<200000;$i++){
+                DB::table('articles')->insert([
+                    'title'=>str_random(10),
+                    'content'=>str_random(100),
+                    'author_id'=>rand(0,10),
+                    'type'=>rand(1,2),
+                    'post_at'=>date('y-m-d H:i:s',time()),
+                ]);
+            }
+        }
     }
 
 }

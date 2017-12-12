@@ -10,16 +10,6 @@
         <div class="search-bar">
             <el-row :gutter="20">
                 <el-col :span="5">
-                    <el-select style="width:100%;" v-model="filter.type_id" placeholder="文章类型">
-                        <el-option
-                                v-for="item in options"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                        </el-option>
-                    </el-select>
-                </el-col>
-                <el-col :span="5">
                     <el-input v-model="filter.name" placeholder="标签" @keyup.enter.native="getList()" ></el-input>
                 </el-col>
                 <el-col :span="6">
@@ -93,16 +83,6 @@
                 center>
 
             <el-form :model="labelForm" status-icon ref="labelForm" :rules="rules">
-                <el-form-item  prop="type_id" required>
-                    <el-select style="width:100%;" v-model="labelForm.type_id" clearable placeholder="请选择文章类型">
-                        <el-option
-                                v-for="item in options"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                        </el-option>
-                    </el-select>
-                </el-form-item>
                 <el-form-item  prop="name" required  placeholder="请填写标签名称">
                     <el-input v-model="labelForm.name" auto-complete="off"></el-input>
                 </el-form-item>
@@ -135,15 +115,11 @@
                 pageSize:10,
                 //addType
                 labelForm:{
-                    type_id:null,
                     name:null,
                     author_id:0,
                 },
                 rules: {
                     name: [
-                        { required: true, message: '不能为空', trigger: 'blur' },
-                    ],
-                    type_id:[
                         { required: true, message: '不能为空', trigger: 'blur' },
                     ],
                 },
@@ -167,11 +143,9 @@
                 this.DialogVisible = true;
                 this.dialogTitle = '修改标签';
                 this.labelForm.name = row.name;
-                this.labelForm.type_id = row.type_id;
             },
             openDialog(){
                 this.labelForm.name=null;
-                this.labelForm.type_id=null;
                 this.DialogVisible = true;
                 this.dialogTitle = '新增标签';
             },
@@ -179,7 +153,6 @@
                 this.loading = true;
                 let params = {
                     name:this.filter.name,
-                    type_id:this.filter.type_id,
                     page:this.currentPage,
                     pageSize:this.pageSize,
                 }
@@ -188,22 +161,6 @@
                     this.total = res.data.meta.total;
                     this.loading = false;
                 })
-            },
-            getTypeList(){
-                axios.get('/api/types').then((res)=>{
-                    res.data[0].forEach((item,index)=>{
-                        this.options.push({value:item.id,label:item.name});
-                    })
-                })
-            },
-            typeName(row,column){
-                var res = '';
-                this.options.forEach((item,index)=>{
-                    if(row.type_id==item.value){
-                        res = item.label;
-                    }
-                })
-                return res;
             },
             delete1(id){
                 this.$confirm('删除, 是否继续?', '提示', {
@@ -232,7 +189,6 @@
         },
         mounted(){
             this.getList();
-            this.getTypeList();
             const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
             this.labelForm.author_id = userInfo.id;
         }

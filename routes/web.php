@@ -17,5 +17,5 @@ Route::get('/backend', function () {
 Route::get('/', 'IndexController@index');
 Route::get('/p/{id}','ArticlesController@detail');
 Route::post('/login','Auth\LoginController@login');
-Route::post('/test','TestController@index');
+Route::get('/test','TestController@index');
 
