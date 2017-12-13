@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,6 +11,12 @@ class TestController extends Controller
 {
     //
     public function index(){
+        $article = Article::find(105773);
+        foreach ($article->labels as $label){
+            echo $label->name;
+        }
+    }
+    public function test(){
         set_time_limit(0);
         //清空并关闭输出缓存
         ob_end_clean();

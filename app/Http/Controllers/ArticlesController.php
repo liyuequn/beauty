@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Article;
-use App\Article_label;
+use App\ArticleLabel;
 use App\Label;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ArticlesController extends Controller
 {
@@ -38,21 +39,23 @@ class ArticlesController extends Controller
     public function store(Request $request)
     {
         if($request->input('id')){
-            $articles = Article::find($request->input('id'));
-            $articles->update($request->all());
+            $article = Article::find($request->input('id'));
+            $article->update($request->all());
         }else{
-            $articles = Article::create($request->all());
+            $article = Article::create($request->all());
         }
         //1.对比标签，存储
         $labels = explode(',',$request->input('label'));
-        $label_ids = [];
-        foreach ($labels as $label){
-            $label_ids[] = Label::firstOrCreate($label);
+        $articleLabel = [];
+        foreach ($labels as $key => $label){
+            $articleLabel[$key]['label_id'] = Label::firstOrCreate(['name'=>$label])->id;
+            $articleLabel[$key]['article_id'] = $article->id;
         }
         //2.标签文章关联表
-        Article_label::Create();
-
-        return $articles;
+        ArticleLabel::where('article_id','=',$article->id)->delete();
+        DB::table('article_label')->insert($articleLabel);
+        $article->label = $request->input('label');
+        return $article;
     }
 
     /**
@@ -65,4 +68,15 @@ class ArticlesController extends Controller
         return view('article.index',['article'=>$article]);
     }
 
+    public function detailApi($id)
+    {
+        $article = Article::find($id);
+        $labels ='';
+        foreach ($article->labels as $label){
+            $labels .=  $label->name.',';
+        }
+        $labels = substr($labels,0,-1);
+        $article->label = $labels;
+        return $article;
+    }
 }

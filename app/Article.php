@@ -40,6 +40,7 @@ class Article extends Model
      * 获取该文章的多个标签
      */
     public function labels(){
-        return $this->belongsToMany('App\Label');
+
+        return $this->belongsToMany(Label::class);
     }
 }

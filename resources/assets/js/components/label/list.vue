@@ -32,18 +32,12 @@
             <el-table-column
                     prop="name"
                     label="标签"
-                    width="120">
-            </el-table-column>
-            <el-table-column
-                    prop="type_id"
-                    label="类型"
-                    :formatter="typeName"
-            >
+                    >
             </el-table-column>
             <el-table-column
                     fixed="right"
                     label="操作"
-                    width="220">
+                    >
                 <template slot-scope="scope">
                     <el-button
                             type="primary"

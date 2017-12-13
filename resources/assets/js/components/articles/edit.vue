@@ -93,6 +93,7 @@
                 article:{
                     id:null,
                     post_at:'',
+                    label:'',
                     title:'',
                     type:'',
                     content:'',
