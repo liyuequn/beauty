@@ -6,7 +6,7 @@ use App\Http\Resources\LabelsCollection;
 use App\Label;
 use Illuminate\Http\Request;
 
-class labelsController extends Controller
+class LabelsController extends Controller
 {
     public function index (Request $request)
     {
