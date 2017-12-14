@@ -17,6 +17,7 @@ class ArticlesController extends Controller
     public function index(Request $request)
     {
         $where = [];
+        $author_id = $request->input('author_id');
         $type = $request->input('type');
         $title = $request->input('title');
         $pageSize = $request->input('pageSize');
@@ -25,6 +26,9 @@ class ArticlesController extends Controller
         }
         if($type){
             $where[] = ['type','=',$type];
+        }
+        if($author_id){
+            $where[] = ['author_id','=',$author_id];
         }
         return new \App\Http\Resources\ArticleCollection
         (

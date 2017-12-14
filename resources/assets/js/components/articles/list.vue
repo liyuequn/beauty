@@ -111,6 +111,7 @@
                 loading:false,
                 title:'',
                 type:'',
+                author_id:0,
                 options:[
                     {value:'',label:'全部'},
                 ],
@@ -137,6 +138,7 @@
             getList(){
                 this.loading = true;
                 let params = {
+                    author_id:JSON.parse(sessionStorage.getItem('userInfo')).id,
                     type:this.type,
                     title:this.title,
                     page:this.currentPage,

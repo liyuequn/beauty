@@ -6,11 +6,17 @@ use App\Article;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class TestController extends Controller
 {
     //
     public function index(){
+        Redis::set('name','liyuequn');
+        $name = Redis::get('name');
+        var_dump($name);
+    }
+    public function test2(){
         $article = Article::find(105773);
         foreach ($article->labels as $label){
             echo $label->name;
