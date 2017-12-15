@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{asset('css/github-markdown.css')}}">
 <style>
 .author{
     margin: 30px 0 40px;
@@ -94,7 +95,7 @@
             </div>
             <!-- 如果是当前作者，加入编辑按钮 -->
         </div>
-        <div class="content">
+        <div id="content" class="content markdown-body">
             <?php echo $article->content ?>
         </div>
         <div class="author follow-detail">

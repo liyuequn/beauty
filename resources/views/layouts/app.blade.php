@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap@next/dist/css/bootstrap.min.css"/>
-    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
-    {{--<link rel="stylesheet" href="{{asset('css/github-markdown.css')}}">--}}
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="icon" href="{{asset('images/icon/Beauty.png')}}" type="image/x-icon"/>
     <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/vue"></script>
+    <script src="{{asset('js/app.js')}}"></script>
     <title>@yield('title')</title>
     <style>
         .navbar-brand{border: 1px solid #f0f0f0;height: 66px!important;position: fixed;top:0;z-index:2;background-color: white;  }

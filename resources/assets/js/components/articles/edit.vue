@@ -224,7 +224,7 @@
                 insertTexts: {
                     link: ['[', ']( )']
                 },
-                // hideIcons: ['guide', 'heading', 'quote', 'image', 'preview', 'side-by-side', 'fullscreen'],
+//                 hideIcons: ['guide', 'heading', 'quote', 'image', 'preview', 'side-by-side', 'fullscreen'],
                 placeholder: this.placeholder
             })
             if (this.value) {
