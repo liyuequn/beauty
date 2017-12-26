@@ -124,7 +124,7 @@
                 this.$refs[formName].validate((valid) => {
                     if(valid){
                         this.DialogVisible = false;
-                        axios.post('/api/labels',this.labelForm).then((res)=>{
+                        axios.post('/api/v1/labels',this.labelForm).then((res)=>{
                             this.$message.success('创建成功');
                             this.getList();
                         }).catch((error)=>{
@@ -150,7 +150,7 @@
                     page:this.currentPage,
                     pageSize:this.pageSize,
                 }
-                axios.get('/api/labels',{params}).then((res)=>{
+                axios.get('/api/v1/labels',{params}).then((res)=>{
                     this.tableData = res.data.data[0];
                     this.total = res.data.meta.total;
                     this.loading = false;
@@ -162,7 +162,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then((res)=>{
-                    axios.delete('/api/labels/'+id).then((res)=>{
+                    axios.delete('/api/v1/labels/'+id).then((res)=>{
                         this.$message({
                             type: 'success',
                             message: '成功!'

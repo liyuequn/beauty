@@ -115,7 +115,7 @@
                 this.$refs[formName].validate((valid) => {
                     if(valid){
                         this.DialogVisible = false;
-                        axios.post('/api/types',this.typeForm).then((res)=>{
+                        axios.post('/api/v1/types',this.typeForm).then((res)=>{
                             this.$message.success('创建成功');
                             this.getList();
                         }).catch((error)=>{
@@ -135,7 +135,7 @@
                 let params = {
                     name:this.filter.name,
                 }
-                axios.get('/api/types',{params}).then((res)=>{
+                axios.get('/api/v1/types',{params}).then((res)=>{
                     this.tableData = res.data[0];
                     this.loading = false;
                 })
@@ -146,7 +146,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then((res)=>{
-                    axios.delete('/api/types/'+id).then((res)=>{
+                    axios.delete('/api/v1/types/'+id).then((res)=>{
                         this.$message({
                             type: 'success',
                             message: '成功!'

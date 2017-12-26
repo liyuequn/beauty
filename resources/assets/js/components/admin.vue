@@ -10,6 +10,12 @@
                 </a>
             </div>
             <div style="padding-right: 35px">
+
+                <a href="" style="font-size:22px;color:white;">
+                    <i class="el-icon-message"></i>
+                    <el-badge class="mark" :value="12" />
+                </a>
+
                 <el-dropdown>
                     <span class="el-dropdown-link userinfo-inner"><img :src="this.sysUserAvatar" /> {{sysUserName}}</span>
                     <el-dropdown-menu slot="dropdown">
@@ -61,6 +67,10 @@
     .el-menu-item-group__title{padding:0px;}
     .right-gold{border-right:1px solid gold;}
     .userinfo-inner{  color: white;  }
+    .item {
+        margin-top: 10px;
+        margin-right: 40px;
+    }
     .userinfo-inner  img {  width: 40px;  height: 40px;  border-radius: 20px;  margin: 10px 0px 10px 10px;  float: right;  }
 </style>
 
@@ -100,7 +110,7 @@
         },
         mounted(){
             //getUserInfo
-            axios.get('/api/user').then((res)=>{
+            axios.get('/api/v1/user').then((res)=>{
                 sessionStorage.setItem('userInfo',JSON.stringify(res.data));
                 this.sysUserName = res.data.name;
             })

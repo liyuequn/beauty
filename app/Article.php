@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Route;
 
 class Article extends Model
 {
@@ -42,5 +43,22 @@ class Article extends Model
     public function labels(){
 
         return $this->belongsToMany(Label::class);
+    }
+
+    /**
+     * @param $value
+     * @return string
+     * 字段修改器，预处理
+     */
+    public function getContentAttribute($value)
+    {
+        $route = Route::current();
+        if($route->uri=='api/articles'){
+            $parseDown = new \Parsedown();
+            return strip_tags($parseDown->text($value));
+        }else{
+            return $value;
+        }
+
     }
 }

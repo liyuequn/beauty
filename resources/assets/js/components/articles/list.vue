@@ -144,14 +144,14 @@
                     page:this.currentPage,
                     pageSize:this.pageSize,
                 }
-                axios.get('/api/articles',{params}).then((res)=>{
+                axios.get('/api/v1/articles',{params}).then((res)=>{
                     this.tableData = res.data.data[0];
                     this.total = res.data.meta.total;
                     this.loading = false;
                 })
             },
             getTypeList(){
-                axios.get('/api/types').then((res)=>{
+                axios.get('/api/v1/types').then((res)=>{
                     res.data[0].forEach((item,index)=>{
                         this.options.push({value:item.id,label:item.name});
                     })
@@ -163,7 +163,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then((res)=>{
-                    axios.delete('/api/articles/'+id).then((res)=>{
+                    axios.delete('/api/v1/articles/'+id).then((res)=>{
                         this.$message({
                             type: 'success',
                             message: '成功!'

@@ -43,11 +43,13 @@
         },
         methods:{
             detail(){
-                axios.get('/api/articles/'+this.$route.params.id).then((res)=>{
+                axios.get('/api/v1/articles/'+this.$route.params.id).then((res)=>{
                     this.article = res.data;
                     document.title = this.article.title;
                     const converter = new showdown.Converter();//初始化
+                    converter.setFlavor('github');
                     this.html = converter.makeHtml(this.article.content)//转化
+
                 })
             }
         },

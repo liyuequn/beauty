@@ -53,7 +53,20 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-
+        'mysql_omc' => [
+            'driver' => 'mysql',
+            'host' => env('DB_OMC_HOST', '127.0.0.1'),
+            'port' => env('DB_OMC_PORT', '3306'),
+            'database' => env('DB_OMC_DATABASE', 'forge'),
+            'username' => env('DB_OMC_USERNAME', 'forge'),
+            'password' => env('DB_OMC_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8',
+            'collation' => 'utf8_general_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+        ],
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),

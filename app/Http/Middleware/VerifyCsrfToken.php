@@ -13,5 +13,8 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
+        '/sendMessage',
+        '/readMessage',
+        '/receiveMessage/{send_to_id}/sys/{sys}',
     ];
 }

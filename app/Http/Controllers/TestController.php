@@ -7,11 +7,60 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
+use Laravoole\Wrapper\SwooleWebSocketWrapper;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TestController extends Controller
 {
     //
-    public function index(){
+    public function index()
+    {
+        $ws = new SwooleWebSocketWrapper("127.0.0.1",9050);
+
+//监听WebSocket连接打开事件
+        $ws->on('open', function ($ws, $request) {
+            var_dump($request->fd, $request->get, $request->server);
+            $ws->push($request->fd, "hello, welcome\n");
+        });
+
+//监听WebSocket消息事件
+        $ws->on('message', function ($ws, $frame) {
+            echo "Message: {$frame->data}\n";
+            $ws->push($frame->fd, "server: {$frame->data}");
+        });
+
+//监听WebSocket连接关闭事件
+        $ws->on('close', function ($ws, $fd) {
+            echo "client-{$fd} is closed\n";
+        });
+    }
+    public function excel(){
+        set_time_limit(0);
+        ini_set('memory_limit','1024M');
+        Excel::create('test',function($excel)  {
+            $excel->setTitle('测试');
+            // Chain the setters
+            $excel->setCreator('李岳群')
+                ->setCompany('北京幼狮科技有限公司');
+            // Call them separately
+            $excel->setDescription('我是一个描述');
+            //设置一页
+            // Our first sheet
+            $excel->sheet('First sheet', function($sheet)  {
+                // Append multiple rows
+                for ($i=0;$i<68;$i++){
+                    $data = Article::skip($i*10000)->take(10000)->get()->toArray();
+                    sleep(1);
+                    $sheet->rows($data);
+                    unset($data);
+                }
+            });
+
+        })->download('xlsx');;
+        //store on server
+//        })->store('xls',storage_path('excel/exports'));
+    }
+    public function redis(){
         Redis::set('name','liyuequn');
         $name = Redis::get('name');
         var_dump($name);

@@ -3,7 +3,7 @@
             <el-form :model="article" :rules="rules" ref="ruleForm">
                 <div class="search-bar">
                 <el-row :gutter="20">
-                    <el-col :span="5">
+                    <el-col :md="5" class="el-form-item-md">
                         <el-form-item prop="type">
                             <el-select style="width:100%;" v-model="article.type" placeholder="文章分类">
                                 <el-option
@@ -15,19 +15,20 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="5">
+                    <el-col :md="5" class="el-form-item-md">
                         <el-form-item prop="title">
                             <el-input v-model="article.title" placeholder="标题"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="5">
+                    <el-col :md="5" class="el-form-item-md">
                         <el-form-item prop="title">
                             <el-input v-model="article.label" placeholder="标签,请以逗号,隔开"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="6">
+                    <el-col :md="5" class="el-form-item-md">
                         <div class="block">
                             <el-date-picker
+                                    style="width:100%"
                                     v-model="article.post_at"
                                     type="datetime"
                                     value-format="yyyy-MM-dd HH:mm:ss"
@@ -35,23 +36,22 @@
                             </el-date-picker>
                         </div>
                     </el-col>
-                    <el-col :span="6">
-                    </el-col>
                 </el-row>
                 </div>
 
-                <div class='simplemde-container' :style="{height:height+'px',zIndex:zIndex}">
+                <div class='simplemde-container' :style="{height:'40%',zIndex:zIndex}">
                     <el-form-item prop="content">
-                        <textarea :id='id' v-model="article.content">
+                        <textarea id='editor' v-model="article.content">
                         </textarea>
                     </el-form-item>
                 </div>
+                <input type="file" id="btn_file" style="display:none">
             </el-form>
+            <div class="btn-post" style="position:relative;z-index:100;text-align:right;margin-top:100px;">
+                <el-button type="primary" @click="save()" :loading="saveLoading" plain>保存</el-button>
+                <el-button type="primary" @click="submit()" :loading="submitLoading" plain>发表</el-button>
+            </div>
 
-        <div class="btn-post" style="position: fixed;right:20px;bottom: 100px;z-index:2;">
-            <el-button type="primary" @click="save()" :loading="saveLoading" plain>保存</el-button>
-            <el-button type="primary" @click="submit()" :loading="submitLoading" plain>发表</el-button>
-        </div>
     </div>
 
 </template>
@@ -63,10 +63,6 @@
         name: 'simplemde-md',
         props: {
             value: String,
-            id: {
-                type: String,
-                default: 'markdown-editor'
-            },
             autofocus: {
                 type: Boolean,
                 default: false
@@ -131,7 +127,7 @@
                         var _this = this;
                         this.saveLoading = true;
                         let params = this.article;
-                        axios.post('/api/articles',params).then((res)=>{
+                        axios.post('/api/v1/articles',params).then((res)=>{
                             if(res.status==200){
                                 this.saveLoading = false;
                                 this.article = res.data;
@@ -159,7 +155,7 @@
                         var _this = this;
                         this.submitLoading = true;
                         let params = this.article;
-                        axios.post('/api/articles',params).then((res)=>{
+                        axios.post('/api/v1/articles',params).then((res)=>{
                             if(res.status==200){
                                 this.submitLoading = false;
                                 this.article = res.data;
@@ -183,17 +179,38 @@
                 })
             },
             detail(){
-                axios.get('/api/articles/'+this.$route.params.id).then((res)=>{
+                axios.get('/api/v1/articles/'+this.$route.params.id).then((res)=>{
                     this.article = res.data;
                     this.simplemde.value(res.data.content);
                 })
             },
             getTypeList(){
-                axios.get('/api/types').then((res)=>{
+                axios.get('/api/v1/types').then((res)=>{
                     res.data[0].forEach((item,index)=>{
                         this.options.push({value:item.id,label:item.name});
                     })
                 })
+            },
+            selectImage(editor) {
+                var fileBtn = document.getElementById("btn_file");
+                fileBtn.onchange = this.uploadImage;
+                fileBtn.click();
+            },
+            uploadImage() {
+                var fileBtn = document.getElementById("btn_file");
+                var formData = new FormData();
+                formData.append("file", fileBtn.files[0]);
+                axios.post('/api/v1/image/upload', formData).then(({data}) => {
+
+                    var pos = this.simplemde.codemirror.getCursor();
+                    this.simplemde.codemirror.setSelection(pos, pos);
+                    this.simplemde.codemirror.replaceSelection('![](' + data.data.image + ')');
+
+                    console.log(data);
+
+                });
+                console.log(fileBtn.files[0]);
+                console.log(1);
             },
         },
         watch: {
@@ -217,29 +234,33 @@
                 time.getSeconds();
 
             this.simplemde = new SimpleMDE({
-                element: document.getElementById(this.id),
+                element: document.getElementById('editor'),
                 autofocus: this.autofocus,
                 toolbar: this.toolbar,
                 spellChecker: false,
                 insertTexts: {
                     link: ['[', ']( )']
                 },
-                // hideIcons: ['guide', 'heading', 'quote', 'image', 'preview', 'side-by-side', 'fullscreen'],
+//                 hideIcons: ['guide', 'heading', 'quote', 'image', 'preview', 'side-by-side', 'fullscreen'],
+                showIcons: ["code", "table"],
                 placeholder: this.placeholder
             })
             if (this.value) {
                 this.simplemde.value(this.value)
             }
             this.simplemde.codemirror.on('change', () => {
-                if (this.hasChange) {
-                    this.hasChange = true
-                }
-                this.$emit('input', this.simplemde.value())
+//                if (this.hasChange) {
+//                    this.hasChange = true
+//                }
+//                this.$emit('input', this.simplemde.value())
+            })
+            this.simplemde.codemirror.on('beforeChange', () => {
+                console.log(this.simplemde.value());
+//                this.selectImage();
             })
             if(this.$route.params.id){
                 this.detail();
             }
-
 
         },
         destroyed() {
@@ -252,10 +273,10 @@
 <style>
     .simplemde-container .CodeMirror {
         /*height: 150px;*/
-        min-height: 150px;
+        min-height: 250px;
     }
     .simplemde-container .CodeMirror-scroll {
-        min-height: 150px;
+        min-height: 250px;
     }
     .simplemde-container .CodeMirror-code {
         padding-bottom: 40px;
@@ -276,12 +297,17 @@
         color: #E61E1E;
     }
     .search-bar{
-        width:100%;height:64px;
+        width:100%;height:auto;
         background-color:#F4F9FF;
         display:block;
-        padding-top: 20px;
-        padding-left: 20px;
+        padding:20px 20px 0px 20px;
         margin-bottom:20px;
+    }
+    .el-form-item{
+        margin-bottom: 0px;
+    }
+    .el-form-item-md{
+        margin-bottom: 22px;
     }
 </style>
 

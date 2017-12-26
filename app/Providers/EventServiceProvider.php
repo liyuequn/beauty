@@ -26,7 +26,9 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
+        \Event::listen('laravoole.requesting', function ($request) {
+            \Log::info($request->segments());
+        });
         //
     }
 }

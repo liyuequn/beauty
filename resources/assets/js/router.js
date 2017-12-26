@@ -25,6 +25,15 @@ let routes = [
     },
     {
         path: '/',
+        component: require('./components/admin.vue'),
+        name: '消息',
+        hidden: false,
+        children:[
+            { path: '/message', name:'消息',component: require('./components/message/list.vue')},
+        ]
+    },
+    {
+        path: '/',
         name:'权限管理',
         component: require('./components/admin.vue'),
         hidden:false,

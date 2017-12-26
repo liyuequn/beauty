@@ -50,7 +50,7 @@
             getuser(){
                 this.loading = true;
                 var _this = this;
-                axios.get('/api/users').then((res)=>{
+                axios.get('/api/v1/users').then((res)=>{
                     _this.tableData = res.data.data;
                     this.loading = false;
                 }).catch((error)=>{
