@@ -98367,6 +98367,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 link: ['[', ']( )']
             },
             //                 hideIcons: ['guide', 'heading', 'quote', 'image', 'preview', 'side-by-side', 'fullscreen'],
+
             showIcons: ["code", "table"],
             placeholder: this.placeholder
         });

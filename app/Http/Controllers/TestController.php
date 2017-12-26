@@ -7,12 +7,15 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
+
 use Laravoole\Wrapper\SwooleWebSocketWrapper;
+
 use Maatwebsite\Excel\Facades\Excel;
 
 class TestController extends Controller
 {
     //
+
     public function index()
     {
         $ws = new SwooleWebSocketWrapper("127.0.0.1",9050);
@@ -35,6 +38,7 @@ class TestController extends Controller
         });
     }
     public function excel(){
+
         set_time_limit(0);
         ini_set('memory_limit','1024M');
         Excel::create('test',function($excel)  {
@@ -48,7 +52,9 @@ class TestController extends Controller
             // Our first sheet
             $excel->sheet('First sheet', function($sheet)  {
                 // Append multiple rows
+
                 for ($i=0;$i<68;$i++){
+
                     $data = Article::skip($i*10000)->take(10000)->get()->toArray();
                     sleep(1);
                     $sheet->rows($data);

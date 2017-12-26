@@ -4,8 +4,13 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "hash": "3b18a4d29387744a70609f706881a618",
     "content-hash": "64a5fc755424a9d53697c92db46fc550",
+=======
+    "hash": "f876e8c680fd0ce35448fed16a48fcf1",
+    "content-hash": "186e6d7ec6fb12c154ef4a654dce6dd3",
+>>>>>>> 781274e7cc255b09f0a3ca02c046707a013ae384
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -2882,6 +2887,7 @@
             "time": "2017-10-11 12:05:26"
         },
         {
+<<<<<<< HEAD
             "name": "symfony/polyfill-php70",
             "version": "v1.6.0",
             "source": {
@@ -2941,6 +2947,8 @@
             "time": "2017-10-11 12:05:26"
         },
         {
+=======
+>>>>>>> 781274e7cc255b09f0a3ca02c046707a013ae384
             "name": "symfony/polyfill-util",
             "version": "v1.6.0",
             "source": {
