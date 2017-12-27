@@ -112,6 +112,7 @@
             //getUserInfo
             axios.get('/api/v1/user').then((res)=>{
                 sessionStorage.setItem('userInfo',JSON.stringify(res.data));
+                sessionStorage.setItem('userId',JSON.stringify(res.data.id));
                 this.sysUserName = res.data.name;
             })
         }

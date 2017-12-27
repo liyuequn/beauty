@@ -49,6 +49,7 @@ class LoginController extends Controller
         if($res)
         {
             session(['user' => $user->name]);
+            session(['userId' => $user->id]);
             $password_client = Client::query()->where('password_client',1)->latest()->first();
             $request->request->add([
                 'grant_type' => 'password',

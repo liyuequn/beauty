@@ -39,6 +39,12 @@
                         type: 'success'
                     });
                     _this.logining = false;
+                    const access_token = sessionStorage.getItem('access_token');
+                    window.axios.defaults.headers.common['Authorization'] = 'Bearer '+access_token;
+                    axios.get('/api/v1/user').then((res)=>{
+                        sessionStorage.setItem('userInfo',JSON.stringify(res.data));
+                        sessionStorage.setItem('userId',res.data.id);
+                    })
                     window.location.href="/";
                 }).catch(function (error) {
                     if(error.response.status==500){

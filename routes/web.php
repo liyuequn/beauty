@@ -32,5 +32,8 @@ Route::post('/logout','UserController@logout');
 Route::get('/write',function (){
     return view('article.write');
 });
+Route::get('/article/edit/{id}',function (){
+    return view('article.write');
+});
 
 

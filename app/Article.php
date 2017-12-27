@@ -44,6 +44,9 @@ class Article extends Model
 
         return $this->belongsToMany(Label::class);
     }
+    public function countComments($article_id){
+        return Comment::where('article_id',$article_id)->count();
+    }
 
     /**
      * @param $value
@@ -53,12 +56,15 @@ class Article extends Model
     public function getContentAttribute($value)
     {
         $route = Route::current();
-        if($route->uri=='api/articles'){
+        if($route->uri=='api/v1/articles'){
             $parseDown = new \Parsedown();
             return strip_tags($parseDown->text($value));
         }else{
             return $value;
         }
 
+    }
+    public function getTypeAttribute($value){
+        return Type::find($value)->name;
     }
 }

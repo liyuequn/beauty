@@ -73,12 +73,8 @@
                         {{mb_strlen($article->content)>206?'...':''}}
                     </div>
                     <div class="footer">
-                        @if ($article->type === 2)
-                        <button class="btn btn-default btn-xs tab right-15">生活</button>
-                        @elseif ($article->type === 1)
-                            <button class="btn btn-default btn-xs tab right-15">技术</button>
-                        @endif
 
+                        <button class="btn btn-default btn-xs tab right-15">{{$article->type}}</button>
                         <img  src="{{asset('images/icon/eye.png')}}" width="20" alt="">
                         <span class="right-15">{{$article->hits}}</span>
                         <img  src="{{asset('images/icon/comment.png')}}" width="17" alt="">

@@ -41,7 +41,7 @@
 
                 <div class='simplemde-container' :style="{height:'40%',zIndex:zIndex}">
                     <el-form-item prop="content">
-                        <textarea id='editor' v-model="article.content">
+                        <textarea :id='id' v-model="article.content">
                         </textarea>
                     </el-form-item>
                 </div>
@@ -62,6 +62,10 @@
     export default {
         name: 'simplemde-md',
         props: {
+            id:{
+                type: String,
+                default: 'editor'
+            },
             value: String,
             autofocus: {
                 type: Boolean,
@@ -178,8 +182,8 @@
                     }
                 })
             },
-            detail(){
-                axios.get('/api/v1/articles/'+this.$route.params.id).then((res)=>{
+            detail(id){
+                axios.get('/api/v1/articles/'+id).then((res)=>{
                     this.article = res.data;
                     this.simplemde.value(res.data.content);
                 })
@@ -234,15 +238,14 @@
                 time.getSeconds();
 
             this.simplemde = new SimpleMDE({
-                element: document.getElementById('editor'),
+                element: document.getElementById(this.id),
                 autofocus: this.autofocus,
                 toolbar: this.toolbar,
                 spellChecker: false,
                 insertTexts: {
                     link: ['[', ']( )']
                 },
-//                 hideIcons: ['guide', 'heading', 'quote', 'image', 'preview', 'side-by-side', 'fullscreen'],
-
+                //hideIcons: ['guide', 'heading', 'quote', 'image', 'preview', 'side-by-side', 'fullscreen'],
                 showIcons: ["code", "table"],
                 placeholder: this.placeholder
             })
@@ -250,23 +253,29 @@
                 this.simplemde.value(this.value)
             }
             this.simplemde.codemirror.on('change', () => {
-//                if (this.hasChange) {
-//                    this.hasChange = true
-//                }
-//                this.$emit('input', this.simplemde.value())
+                if (this.hasChange) {
+                    this.hasChange = true
+                }
+                this.$emit('input', this.simplemde.value())
             })
             this.simplemde.codemirror.on('beforeChange', () => {
                 console.log(this.simplemde.value());
 //                this.selectImage();
             })
-            if(this.$route.params.id){
-                this.detail();
+            var arr = window.location.href.split('/');
+            if(arr.length==6){
+                this.detail(arr[5]);
             }
+            if(this.$route.params.id){
+                this.detail(this.$route.params.id);
+            }
+
+
+
 
         },
         destroyed() {
             this.simplemde = null;
-
         }
     }
 </script>

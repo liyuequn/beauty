@@ -46,7 +46,7 @@
 }
 .follow-detail{
     padding: 20px;
-    background-color: hsla(0,0%,71%,.1);
+    background-color: #F4F9FF;
     border: 1px solid #e1e1e1;
     border-radius: 4px;
     font-size: 12px;
@@ -86,7 +86,7 @@
                 <div class="meta">
                     <!-- 如果文章更新时间大于发布时间，那么使用 tooltip 显示更新时间 -->
                     <span class="publish-time">{{$article->post_at}}</span>
-                    <span class="wordage hidden-xs">字数 2436</span>
+                    <span class="wordage hidden-xs">字数 {{intval(strlen($article->content)/3)}}</span>
                     <span class="views-count ">阅读 {{$article->hits}}</span>
                     <span class="comments-count ">评论 33</span>
                     <span class="likes-count hidden-xs">喜欢 175</span>
@@ -94,6 +94,11 @@
                 </div>
             </div>
             <!-- 如果是当前作者，加入编辑按钮 -->
+            @if($article->author_id==session('userId'))
+                <a href="/article/edit/{{$article->id}}" class="btn btn-success" style="margin-left: 10%;display: inline;">
+                    编辑
+                </a>
+            @endif
         </div>
         <div id="content" class="content markdown-body">
             <?php echo $article->content ?>
@@ -107,9 +112,14 @@
                 <span class="meta">写了 337295 字，被 15281 人关注，获得了 16785 个喜欢</span>
             </div>
             <div class="signature">
-                心比人老，人比花娇。喜欢写女人，还有思考。音乐是怎样也戒不掉的毒药，那不如就一起在旋律中一醉方休。
+                音乐是怎样也戒不掉的毒药，那不如就一起在旋律中一醉方休。
             </div>
         </div>
+        {{--评论模块--}}
+        <comment></comment>
+        {{--评论--}}
+        <comments></comments>
+
     </div>
     <div class="col-md-2"></div>
 

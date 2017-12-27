@@ -67,6 +67,7 @@ class ArticlesController extends Controller
      */
     public function detail($id){
         $article = Article::find($id);
+        Article::where('id',$id)->update(['hits'=>$article->hits+1]);
         $Parsedown = new \Parsedown();
         $article->content =  $Parsedown->text($article->content);
         return view('article.index',['article'=>$article]);
