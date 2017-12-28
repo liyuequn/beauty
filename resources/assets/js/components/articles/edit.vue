@@ -224,8 +224,8 @@
             }
         },
         mounted() {
-            this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
-            this.article.author_id = this.userInfo.id;
+            this.article.author_id = sessionStorage.getItem('userId');
+            alert(this.article.author_id)
             this.getTypeList();
             var time = new Date();
             var month = time.getMonth()+1;

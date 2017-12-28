@@ -29,7 +29,6 @@
             login(){
                 var _this = this;
                 axios.post('/login', this.logForm).then(function (response) {
-                    console.log(response)
                     sessionStorage.setItem('access_token',response.data.access_token)
                     sessionStorage.setItem('refresh_token',response.data.refresh_token)
                     sessionStorage.setItem('token_type',response.data.token_type)
@@ -39,11 +38,12 @@
                         type: 'success'
                     });
                     _this.logining = false;
-                    const access_token = sessionStorage.getItem('access_token');
-                    window.axios.defaults.headers.common['Authorization'] = 'Bearer '+access_token;
+                    window.axios.defaults.headers.common['Authorization'] = response.data.token_type+' '+response.data.access_token;
                     axios.get('/api/v1/user').then((res)=>{
                         sessionStorage.setItem('userInfo',JSON.stringify(res.data));
                         sessionStorage.setItem('userId',res.data.id);
+                    }).catch((error)=>{
+
                     })
                     window.location.href="/";
                 }).catch(function (error) {

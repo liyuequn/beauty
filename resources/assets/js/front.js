@@ -4,6 +4,7 @@ import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.component('ArticleEditor', require('./components/articles/edit.vue'));
 Vue.component('login', require('./front/user/login.vue'));
+Vue.component('register', require('./front/user/register.vue'));
 Vue.component('comment', require('./front/article/comment.vue'));
 Vue.component('comments', require('./front/article/comments.vue'));
 Vue.use(Element,{ size: 'normal' })
