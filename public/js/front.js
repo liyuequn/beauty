@@ -27467,9 +27467,9 @@ window.axios.defaults.headers.common['Accept'] = 'application/json';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 if (token) {
   window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-} else {}
-// console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-
+} else {
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -98356,7 +98356,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this7 = this;
 
         this.article.author_id = sessionStorage.getItem('userId');
-        alert(this.article.author_id);
         this.getTypeList();
         var time = new Date();
         var month = time.getMonth() + 1;
@@ -98391,8 +98390,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (arr.length == 6) {
             this.detail(arr[5]);
         }
-        if (this.$route.params.id) {
-            this.detail(this.$route.params.id);
+        if (!arr[arr.length] == 'write') {
+            if (this.$route.params.id) {
+                this.detail(this.$route.params.id);
+            }
         }
     },
     destroyed: function destroyed() {
@@ -106280,7 +106281,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         if (res.status == 200) {
                             _this.$message({
                                 showClose: true,
-                                message: '登录成功',
+                                message: '注册成功',
                                 type: 'success'
                             });
                         }

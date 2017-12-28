@@ -225,7 +225,6 @@
         },
         mounted() {
             this.article.author_id = sessionStorage.getItem('userId');
-            alert(this.article.author_id)
             this.getTypeList();
             var time = new Date();
             var month = time.getMonth()+1;
@@ -266,13 +265,11 @@
             if(arr.length==6){
                 this.detail(arr[5]);
             }
-            if(this.$route.params.id){
-                this.detail(this.$route.params.id);
+            if(!arr[arr.length]=='write'){
+                if(this.$route.params.id){
+                    this.detail(this.$route.params.id);
+                }
             }
-
-
-
-
         },
         destroyed() {
             this.simplemde = null;

@@ -57,7 +57,7 @@ class LoginController extends Controller
                 'client_secret' => $password_client->secret,
                 'username' => $request->input('username'),
                 'password' => $request->input('password'),
-                'scope' => '',
+                'scope' => '*',
             ]);
             $proxy = Request::create(
                 'oauth/token',

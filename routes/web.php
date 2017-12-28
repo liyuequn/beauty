@@ -31,7 +31,7 @@ Route::post('/signIn','UserController@signIn');
 Route::post('/logout','UserController@logout');
 Route::get('/write',function (){
     return view('article.write');
-});
+})->middleware(\App\Http\Middleware\CheckLogin::class);
 Route::get('/article/edit/{id}',function (){
     return view('article.write');
 });

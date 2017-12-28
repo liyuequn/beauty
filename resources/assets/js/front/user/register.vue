@@ -86,7 +86,7 @@
                             if(res.status==200){
                                 _this.$message({
                                     showClose: true,
-                                    message: '登录成功',
+                                    message: '注册成功',
                                     type: 'success'
                                 });
                             }

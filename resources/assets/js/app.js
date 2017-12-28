@@ -14,7 +14,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
 
     const access_token = sessionStorage.getItem('access_token');
-    window.axios.defaults.headers.common['Authorization'] = 'Bearer'+access_token;
+    window.axios.defaults.headers.common['Authorization'] = 'Bearer '+access_token;
     if (to.path == '/login') {
         sessionStorage.removeItem('access_token');
     }
