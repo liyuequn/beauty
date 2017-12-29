@@ -10,7 +10,7 @@
     <title>@yield('title')</title>
     <style>
         .navbar-brand1{border: 1px solid #f0f0f0;position: fixed;height:auto;top:0;z-index:2;background-color: white;  }
-        .login{width: 60px;border-radius:20px;color: white; margin-left: 10px;margin-right: 10px;}
+        .login{width: 60px;border-radius:20px;color: white; margin:15px 10px 15px 10px}
         .register{width: 60px;border-radius:20px;color: white;margin-left: 10px;margin-right: 10px; }
         body{background-color: white;}
         .user{height: 100%;background-color: white;border: none;}
