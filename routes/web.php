@@ -17,6 +17,7 @@ Route::get('/backend', function () {
 Route::get('/', 'IndexController@index');
 Route::get('/p/{id}','ArticlesController@detail');
 Route::post('/login','Auth\LoginController@login');
+Route::post('/auth','Auth\LoginController@auth');//自动登录
 Route::get('/test','TestController@index');
 Route::get('/video/{id}','VideoController@index');
 Route::post('/sendMessage','MessageController@create');

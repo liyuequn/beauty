@@ -2,9 +2,8 @@
     <div>
         <div style="border-bottom: rgba(192,192,192,0.42) solid 1px;margin-top: 100px;padding-bottom: 16px;">
             {{comments.length}}条评论
-            <a href="javascript:;">按喜欢排序</a>
-            <a href="javascript:;">按时间正序</a>
-            <a href="javascript:;">按时间倒序</a>
+            <a href="javascript:;" @click="getComments('asc')">按时间正序</a>
+            <a href="javascript:;" @click="getComments('desc')">按时间倒序</a>
         </div>
         <div
                 v-for="(item,index) in comments"
@@ -16,8 +15,8 @@
     margin-bottom: 50px;
 ">
             <div>
-                {{item.user_id}}
-                @{{item.floor}}楼 · {{item.created_at}}
+                {{item.username}}
+                {{item.floor}}楼 · {{item.created_at}}
             </div>
             <div style="margin-top: 20px;">
                 {{item.comment}}
@@ -37,8 +36,9 @@
             }
         },
         methods:{
-            getComments(){
-                axios.get('/api/v1/article/comment/'+this.article_id).then((res)=>{
+            getComments(order){
+                order = order?order:'asc';
+                axios.get('/api/v1/article/comment/'+this.article_id+'?order='+order).then((res)=>{
                     this.comments = res.data;
                 })
             }

@@ -50,25 +50,34 @@ class LoginController extends Controller
         {
             session(['user' => $user->name]);
             session(['userId' => $user->id]);
-            $password_client = Client::query()->where('password_client',1)->latest()->first();
-            $request->request->add([
-                'grant_type' => 'password',
-                'client_id' => $password_client->id,
-                'client_secret' => $password_client->secret,
-                'username' => $request->input('username'),
-                'password' => $request->input('password'),
-                'scope' => '*',
-            ]);
-            $proxy = Request::create(
-                'oauth/token',
-                'POST'
-            );
-            $response = \Route::dispatch($proxy);
-            return $response;
+            return $this->authToken($request);
+
         }else{
             return response('密码错误',401);
         }
 
 
+    }
+    public function auth(Request $request)
+    {
+        $this->authToken($request);
+    }
+    public function authToken($request)
+    {
+        $password_client = Client::query()->where('password_client',1)->latest()->first();
+        $request->request->add([
+            'grant_type' => 'password',
+            'client_id' => $password_client->id,
+            'client_secret' => $password_client->secret,
+            'username' => $request->input('username'),
+            'password' => $request->input('password'),
+            'scope' => '*',
+        ]);
+        $proxy = Request::create(
+            'oauth/token',
+            'POST'
+        );
+        $response = \Route::dispatch($proxy);
+        return $response;
     }
 }

@@ -89,6 +89,7 @@
                                     message: '注册成功',
                                     type: 'success'
                                 });
+                                window.location.href="/login"
                             }
                         }).catch((error)=>{
                             _this.$message({

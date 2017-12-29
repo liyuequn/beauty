@@ -98355,7 +98355,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         var _this7 = this;
 
-        this.article.author_id = sessionStorage.getItem('userId');
+        this.article.author_id = parseInt(sessionStorage.getItem('userId'));
         this.getTypeList();
         var time = new Date();
         var month = time.getMonth() + 1;
@@ -105940,6 +105940,11 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('comment', __webpack_requi
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('comments', __webpack_require__(283));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_element_ui___default.a, { size: 'normal' });
 var access_token = sessionStorage.getItem('access_token');
+if (!access_token) {
+    //在不同页面的时候，自动登录,判断依据用session
+
+
+}
 window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
@@ -106284,6 +106289,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                 message: '注册成功',
                                 type: 'success'
                             });
+                            window.location.href = "/login";
                         }
                     }).catch(function (error) {
                         _this.$message({
@@ -106483,32 +106489,65 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            num: 100,
             article_id: 0,
-            comment: ''
+            commentForm: {
+                comment: ''
+            },
+            rules: {
+                comment: [{ required: true, message: '评论不能为空', trigger: 'blur' }, {
+                    min: 1, max: 100, message: '长度在 1 到 100 个字符', trigger: 'blur'
+                }]
+            }
+
         };
     },
 
+    watch: {
+        'commentForm.comment': 'countVal'
+    },
     methods: {
-        submit: function submit() {
-            var param = {
-                user_id: sessionStorage.getItem('userId'),
-                comment: this.comment,
-                article_id: this.article_id
-            };
-            var _this = this;
-            axios.post('/api/v1/article/comment', param).then(function (res) {
-                _this.$message({
-                    showClose: true,
-                    message: '评论成功',
-                    type: 'success'
-                });
-                __WEBPACK_IMPORTED_MODULE_0__busEvent__["a" /* default */].$emit('commentEvent');
+        submit: function submit(formName) {
+            var _this2 = this;
+
+            this.$refs[formName].validate(function (valid) {
+                if (valid) {
+                    var userInfo = sessionStorage.getItem('userInfo');
+                    var param = {
+                        username: JSON.parse(userInfo).name,
+                        user_id: sessionStorage.getItem('userId'),
+                        comment: _this2.commentForm.comment,
+                        article_id: _this2.article_id
+                    };
+                    var _this = _this2;
+                    axios.post('/api/v1/article/comment', param).then(function (res) {
+                        _this.$message({
+                            showClose: true,
+                            message: '评论成功',
+                            type: 'success'
+                        });
+                        __WEBPACK_IMPORTED_MODULE_0__busEvent__["a" /* default */].$emit('commentEvent');
+                        _this2.commentForm.comment = '';
+                    });
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
             });
+        },
+        countVal: function countVal(val) {
+            this.num = 100 - val.length;
+            console.log(this.num);
         }
     },
     mounted: function mounted() {
@@ -106529,17 +106568,35 @@ var render = function() {
     "div",
     { staticStyle: { "text-align": "right" } },
     [
-      _c("el-input", {
-        staticStyle: { width: "100%" },
-        attrs: { type: "textarea", cols: "30", rows: 5 },
-        model: {
-          value: _vm.comment,
-          callback: function($$v) {
-            _vm.comment = $$v
-          },
-          expression: "comment"
-        }
-      }),
+      _c(
+        "el-form",
+        {
+          ref: "commentForm",
+          attrs: { rules: _vm.rules, model: _vm.commentForm }
+        },
+        [
+          _c(
+            "el-form-item",
+            { attrs: { prop: "comment" } },
+            [
+              _c("el-input", {
+                staticStyle: { width: "100%" },
+                attrs: { type: "textarea", cols: "30", rows: 5 },
+                model: {
+                  value: _vm.commentForm.comment,
+                  callback: function($$v) {
+                    _vm.$set(_vm.commentForm, "comment", $$v)
+                  },
+                  expression: "commentForm.comment"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v("\n        还剩余" + _vm._s(_vm.num) + "个字\n    ")
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "button",
@@ -106548,7 +106605,7 @@ var render = function() {
           staticStyle: { "margin-top": "20px" },
           on: {
             click: function($event) {
-              _vm.submit()
+              _vm.submit("commentForm")
             }
           }
         },
@@ -106651,7 +106708,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -106663,10 +106719,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        getComments: function getComments() {
+        getComments: function getComments(order) {
             var _this2 = this;
 
-            axios.get('/api/v1/article/comment/' + this.article_id).then(function (res) {
+            order = order ? order : 'asc';
+            axios.get('/api/v1/article/comment/' + this.article_id + '?order=' + order).then(function (res) {
                 _this2.comments = res.data;
             });
         }
@@ -106708,11 +106765,31 @@ var render = function() {
               _vm._s(_vm.comments.length) +
               "条评论\n            "
           ),
-          _c("a", { attrs: { href: "javascript:;" } }, [_vm._v("按喜欢排序")]),
+          _c(
+            "a",
+            {
+              attrs: { href: "javascript:;" },
+              on: {
+                click: function($event) {
+                  _vm.getComments("asc")
+                }
+              }
+            },
+            [_vm._v("按时间正序")]
+          ),
           _vm._v(" "),
-          _c("a", { attrs: { href: "javascript:;" } }, [_vm._v("按时间正序")]),
-          _vm._v(" "),
-          _c("a", { attrs: { href: "javascript:;" } }, [_vm._v("按时间倒序")])
+          _c(
+            "a",
+            {
+              attrs: { href: "javascript:;" },
+              on: {
+                click: function($event) {
+                  _vm.getComments("desc")
+                }
+              }
+            },
+            [_vm._v("按时间倒序")]
+          )
         ]
       ),
       _vm._v(" "),
@@ -106732,8 +106809,8 @@ var render = function() {
             _c("div", [
               _vm._v(
                 "\n                " +
-                  _vm._s(item.user_id) +
-                  "\n                @" +
+                  _vm._s(item.username) +
+                  "\n                " +
                   _vm._s(item.floor) +
                   "楼 · " +
                   _vm._s(item.created_at) +

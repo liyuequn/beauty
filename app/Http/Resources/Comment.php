@@ -18,6 +18,7 @@ class Comment extends Resource
             'id'=>$this->id,
             'article_id'=>$this->article_id,
             'user_id'=>$this->user_id,
+            'username'=>$this->username,
             'comment'=>$this->comment,
             'tops'=>$this->tops,
             'floor'=>$this->floor

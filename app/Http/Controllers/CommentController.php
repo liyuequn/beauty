@@ -21,10 +21,12 @@ class CommentController extends Controller
         return Comment::create($data);
     }
 
-    public function index($article_id)
+    public function index($article_id,Request $request)
     {
-
-        return CommentCollection::collection(Comment::where('article_id',$article_id)->get());
+        $order = $request->input('order');
+        return CommentCollection::collection(
+            Comment::where('article_id',$article_id)->orderBy('created_at',$order)->get()
+        );
 
     }
 }

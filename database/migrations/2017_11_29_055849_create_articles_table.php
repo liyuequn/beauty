@@ -16,7 +16,7 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('author_id');
+            $table->integer('author_id')->default(0);
             $table->string('title');
             $table->text('content');
             $table->tinyInteger('type')->default(0);

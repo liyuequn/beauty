@@ -17,7 +17,7 @@ class CreateLabelsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name')->unique();
-            $table->integer('author_id');
+            $table->integer('author_id')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

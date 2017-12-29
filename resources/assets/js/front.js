@@ -9,6 +9,11 @@ Vue.component('comment', require('./front/article/comment.vue'));
 Vue.component('comments', require('./front/article/comments.vue'));
 Vue.use(Element,{ size: 'normal' })
 const access_token = sessionStorage.getItem('access_token');
+if(!access_token){
+    //在不同页面的时候，自动登录,判断依据用session
+
+
+}
 window.axios.defaults.headers.common['Authorization'] = 'Bearer '+access_token;
 
 const app = new Vue({
