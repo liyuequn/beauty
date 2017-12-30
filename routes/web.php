@@ -19,6 +19,7 @@ Route::get('/p/{id}','ArticlesController@detail');
 Route::post('/login','Auth\LoginController@login');
 Route::post('/auth','Auth\LoginController@auth');//自动登录
 Route::get('/test','TestController@index');
+Route::get('/test2','TestController@indexRedis');
 Route::get('/video/{id}','VideoController@index');
 Route::post('/sendMessage','MessageController@create');
 Route::get('/readMessage/{id}','MessageController@read');

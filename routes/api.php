@@ -37,7 +37,7 @@ Route::group(['prefix'=>'v1'],function (){
         \App\Label::find($id)->delete();
     });
     Route::middleware('auth:api')->post('/article/comment','CommentController@create');
-    Route::middleware('auth:api')->get('/article/comment/{article_id}','CommentController@index');
+    Route::get('/article/comment/{article_id}','CommentController@index');
 });
 
 

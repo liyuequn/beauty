@@ -15,8 +15,16 @@ use Maatwebsite\Excel\Facades\Excel;
 class TestController extends Controller
 {
     //
-
-    public function index()
+    public function index(){
+        return Redis::llen('comment_list');
+    }
+    public function indexRedis()
+    {
+        while(Redis::llen('comment_list')>0){
+            echo Redis::rpop('comment_list');
+        }
+    }
+    public function ws()
     {
         $ws = new SwooleWebSocketWrapper("127.0.0.1",9050);
 
@@ -66,11 +74,7 @@ class TestController extends Controller
         //store on server
 //        })->store('xls',storage_path('excel/exports'));
     }
-    public function redis(){
-        Redis::set('name','liyuequn');
-        $name = Redis::get('name');
-        var_dump($name);
-    }
+
     public function test2(){
         $article = Article::find(105773);
         foreach ($article->labels as $label){

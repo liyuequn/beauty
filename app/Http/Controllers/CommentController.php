@@ -8,7 +8,6 @@ use App\Http\Resources\Comment as CommentCollection;
 
 class CommentController extends Controller
 {
-    //
     public function create(Request $request)
     {
         $comment = Comment::where('article_id',$request->input('article_id'))->orderBy('floor','desc')->first();
