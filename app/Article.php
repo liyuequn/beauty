@@ -66,7 +66,7 @@ class Article extends Model
     }
     public function getTypeAttribute($value){
         $route = Route::current();
-        if($route->methods=='GET'){
+        if($route->methods[0]=='GET'){
             return Type::find($value)->name;
         }else{
             return $value;

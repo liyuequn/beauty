@@ -1,11 +1,11 @@
 <style>
     .banner{overflow: hidden;max-height: 300px;}
     .article{overflow:hidden;max-height:500px;width:100%;padding-bottom:25px;padding-top: 17px;background-color: white;border-bottom: 1px solid #f0f0f0;}
-    .article .title{color:#333;display: inherit;font-size: 18px;font-weight: 700;line-height: 1.5;}
+    .article-title{color:#333;display: inherit;font-size: 18px;font-weight: 700;line-height: 1.5;}
     .article .abstract{margin-top: 10px;line-height: 24px;overflow:hidden;}
     .article .nickname{margin-left:10px;color: #333;font-size: 16px;}
-    .article .footer .tab{background-color: white;border-color: hotpink;}
-    .article .footer {margin-top: 8px;}
+    .article .tab{background-color: white;border-color: hotpink;}
+     article-footer {margin-top: 8px;}
     .article .thmub {margin-top: 18px;float: right;}
     .article .col-md-8 {padding: 0;}
     .article .col-md-4 {padding-right: 0;}
@@ -65,14 +65,14 @@
                     <img width="40" src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" class="img-circle" alt="">
                     <a href="" class="nickname">{{$article->user->name}}</a>
                     <span style="margin-left:10px;">{{$article->post_at}}</span>
-                    <a class="title" href="{{ url("/p/{$article->id}") }}">
+                    <a class="article-title" href="{{ url("/p/{$article->id}") }}">
                         {{$article->title}}
                     </a>
                     <div class="abstract">
                         {{ mb_substr($article->content,0,206) }}
                         {{mb_strlen($article->content)>206?'...':''}}
                     </div>
-                    <div class="footer">
+                    <div class="article-footer">
 
                         <button class="btn btn-default btn-xs tab right-15">{{$article->type}}</button>
                         <img  src="{{asset('images/icon/eye.png')}}" width="20" alt="">
