@@ -19,13 +19,16 @@
         .person-center{float: right;height: 100%;}
         .person-center >.dropdown{float: left;height:66px;margin-right: 20px;}
         .write{float: left;height: 50px;margin-top: 8px;line-height: 34px;font-size: 16px;}
-        .footer{margin: 100px 15% 100px 15%}
+        .footer-title{font-size: 16px;}
+        .footer{background-color: #3798CF;min-height: 200px;color: white;padding: 20px 0px 20px 0px ;width: 100%;text-align: center;}
+        body,html{height: 100%;}
     </style>
     @yield('style')
 </head>
 <body>
-        <div id="app">
+        <div id="app" style="height: 100%;">
             @section('header')
+                <a href="top"></a>
                 <header class="nav-justified navbar-brand1" id="header">
                     <div class="container">
                         <div class="logo">
@@ -52,23 +55,58 @@
                                         </ul>
                                     </div>
                                     <a href="{{url('/write')}}" class="btn btn-success write">写文章</a>
-
                                 @endif
                         </div>
 
                     </div>
                 </header>
             @show
-            <div class="container" style="margin-top: 70px;">
+            <div class="container" style="margin:70px auto 0px;min-height: 100%;height: auto!important;">
             @yield('content')
+                <div id="toTop" style="position: fixed;right: 100px;bottom: 181px;right: 10%;display: none;">
+                    <a href="#top" class="btn btn-primary">返回顶部</a>
+                </div>
+                <div style="height: 270px;"></div>
             </div>
             @yield('footer')
-            <div class="footer">
-                到底了。我是网站底部。
-            </div>
+            <div class="footer" style="margin-top: -200px;">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <span class="footer-title">友情链接：</span>
+                            <ul style="list-style-type:none;">
+                                <li>百度</li>
+                                <li>百度</li>
+                                <li>百度</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="footer-title">统计信息：</span>
+                            <ul style="list-style-type:none;">
+                                <li>文章数：10000</li>
+                                <li>用户数：10000</li>
+                                <li>评论数：10000</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="bottom: 0px;text-align: center;">
+                        本博客致力于技术的锻炼和总结，作为一名独立开发者，初衷是想把所有的先进技术都能从本博客上进行演练，并分享出来。
+                        Designed by liyuequn
+                    </div>
+                </div>
         </div>
         <script src="{{ asset('js/front.js') }}"></script>
         <script>
+            $(document).ready(function(){
+                var wh=$(window).height();
+                $(window).scroll(function() {
+                    if($(window).scrollTop()>500){
+                        $("#toTop").fadeIn();
+                    }else{
+                        $("#toTop").fadeOut();
+                    }
+                });
+            });
             $("#logout").click(function () {
                 $.ajax({
                     headers: {
@@ -77,8 +115,14 @@
                     type: "POST",
                     url: "/logout",
                     success: function (msg) {
+                        sessionStorage.removeItem('userId');
+                        sessionStorage.removeItem('userInfo');
+                        sessionStorage.removeItem('access_token')
+                        sessionStorage.removeItem('refresh_token')
+                        sessionStorage.removeItem('token_type')
                         window.location.href = '/';
                         console.log(msg)
+
                     },
                     error: function (error) {
                         console.log(error);

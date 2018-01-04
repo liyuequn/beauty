@@ -116,7 +116,14 @@
             </div>
         </div>
         {{--评论模块--}}
+        @if(session('user'))
         <comment></comment>
+        @else
+            <div style="text-align: center;">
+                <a href="/login" class="btn btn-primary">登录</a>
+                登录后可评论
+            </div>
+        @endif
         {{--评论--}}
         <comments></comments>
 

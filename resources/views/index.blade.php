@@ -69,8 +69,10 @@
                         {{$article->title}}
                     </a>
                     <div class="abstract">
-                        {{ mb_substr($article->content,0,206) }}
-                        {{mb_strlen($article->content)>206?'...':''}}
+                        <a href="{{ url("/p/{$article->id}") }}">
+                            {{ mb_substr($article->content,0,206) }}
+                            {{mb_strlen($article->content)>206?'...':''}}
+                        </a>
                     </div>
                     <div class="article-footer">
 
@@ -78,9 +80,9 @@
                         <img  src="{{asset('images/icon/eye.png')}}" width="20" alt="">
                         <span class="right-15">{{$article->hits}}</span>
                         <img  src="{{asset('images/icon/comment.png')}}" width="17" alt="">
-                        <span class="right-15">{{$article->comment}}</span>
+                        <span class="right-15">{{$article->countComments($article->id)?$article->countComments($article->id):0}}</span>
                         <img  src="{{asset('images/icon/collection.png')}}" width="17" alt="">
-                        <span class="right-15">10000</span>
+                        <span class="right-15">1000</span>
                     </div>
                 </div>
                 <div class="col-md-4 hidden-xs">
