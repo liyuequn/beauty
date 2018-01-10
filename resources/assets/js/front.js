@@ -6,6 +6,7 @@ Vue.component('ArticleEditor', require('./components/articles/edit.vue'));
 Vue.component('login', require('./front/user/login.vue'));
 Vue.component('register', require('./front/user/register.vue'));
 Vue.component('comment', require('./front/article/comment.vue'));
+Vue.component('apend', require('./front/article/apend.vue'));
 Vue.component('comments', require('./front/article/comments.vue'));
 Vue.use(Element,{ size: 'normal' })
 const access_token = sessionStorage.getItem('access_token');

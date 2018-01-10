@@ -42,7 +42,6 @@
             <el-table-column
                     prop="type"
                     label="类型"
-                    :formatter="typeName"
                     width="120">
             </el-table-column>
             <el-table-column
@@ -123,15 +122,6 @@
             }
         },
         methods:{
-            typeName(row,column){
-                var res = '';
-                this.options.forEach((item,index)=>{
-                    if(row.type==item.value){
-                        res = item.label;
-                    }
-                })
-                return res;
-            },
             contentStr(row,cloumn){
                 return row.content.substring(0,100);
             },
@@ -145,7 +135,8 @@
                     pageSize:this.pageSize,
                 }
                 axios.get('/api/v1/articles',{params}).then((res)=>{
-                    this.tableData = res.data.data[0];
+                    console.log(res)
+                    this.tableData = res.data.data;
                     this.total = res.data.meta.total;
                     this.loading = false;
                 })

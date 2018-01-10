@@ -89,8 +89,8 @@
                     <img class="thmub"  width="150" src="//upload-images.jianshu.io/upload_images/2206395-3e9a3800e9195ea1.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="">
                 </div>
             </div>
-                @endforeach
-
+            @endforeach
+            <apend></apend>
         </div>
         <div class="col-md-4 visible-lg-* hidden-xs  hidden-sm">
             <div class="panel panel-primary">

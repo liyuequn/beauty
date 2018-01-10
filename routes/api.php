@@ -24,7 +24,7 @@ Route::group(['prefix'=>'v1'],function (){
     Route::middleware('auth:api')->delete('/articles/{id}', function ($id) {
         \App\Article::find($id)->delete();
     });
-    Route::middleware('auth:api')->get('/articles','ArticlesController@index');
+    Route::get('/articles','ArticlesController@index');
     Route::middleware('auth:api')->post('/types','TypesController@store');
     Route::middleware('auth:api')->post('/image/upload','Api\FilesController@ImageUpload');
     Route::middleware('auth:api')->get('/types','TypesController@index');

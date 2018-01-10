@@ -15,8 +15,24 @@ use Maatwebsite\Excel\Facades\Excel;
 class TestController extends Controller
 {
     //
+    public function index2(){
+
+    }
     public function index(){
-        return Redis::llen('comment_list');
+        Redis::set('username','liyuequn');
+        Redis::set('username2','liyuequn2');
+        Redis::get('username');
+        Redis::getset('username','liyuequn2');
+        Redis::mget('username','username2');
+        Redis::mset('username','fengtingting','age',18);
+        Redis::setnx('username','liyuequn');
+        Redis::mget('username','age');
+        Redis::incr('age');
+        Redis::decr('age');
+        Redis::incrby('age',7);
+        Redis::decrby('age',7);
+        Redis::append('liyuequn','shigeshuaige');
+        return Redis::GETRANGE('username',0,4);
     }
     public function indexRedis()
     {

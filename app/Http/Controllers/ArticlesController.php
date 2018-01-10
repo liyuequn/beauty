@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\ArticleLabel;
+use App\Http\Resources\ArticleResource;
 use App\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +13,7 @@ class ArticlesController extends Controller
 {
     /**
      * @param Request $request
-     * @return \App\Http\Resources\ArticleCollection
+     * @return
      */
     public function index(Request $request)
     {
@@ -30,9 +31,10 @@ class ArticlesController extends Controller
         if($author_id){
             $where[] = ['author_id','=',$author_id];
         }
-        return new \App\Http\Resources\ArticleCollection
+        return ArticleResource::collection
         (
             \App\Article::where($where)->orderBy('created_at','desc')->paginate($pageSize)
+
         );
     }
 
