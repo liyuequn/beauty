@@ -49,7 +49,7 @@
                                         </button>
 
                                         <ul class="dropdown-menu" style="min-width: 0px!important;" aria-labelledby="dropdownMenu1">
-                                            <li><a href="#"><img width="20" src="{{asset('images/icon/user.png')}}" alt=""> 个人中心</a></li>
+                                            <li><a href="/user/center"><img width="20" src="{{asset('images/icon/user.png')}}" alt=""> 个人中心</a></li>
                                             <li role="separator" class="divider"></li>
                                             <li><a href="javascript:;" id="logout"> <img width="20" src="{{asset('images/icon/logout.png')}}" alt=""> 退出</a></li>
                                         </ul>

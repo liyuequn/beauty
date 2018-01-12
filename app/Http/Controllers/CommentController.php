@@ -6,6 +6,7 @@ use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Resources\Comment as CommentCollection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class CommentController extends Controller
 {
@@ -21,8 +22,8 @@ class CommentController extends Controller
             $data = array_merge($floor,$request->all());
             return Comment::create($data);
         });
-
     }
+
 
     public function index($article_id,Request $request)
     {

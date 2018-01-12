@@ -18,19 +18,23 @@ class UserController extends ApiController
     }
     public function store (Request $request)
     {
-       $res = User::where('email',$request->input('email'))->first();
-       if($res){
-           return $this->outPutJson(400,'用户已存在');
-       }else{
-           $data = User::create([
-               'password'=>bcrypt($request->input('password')),
-               'email'=>$request->input('email'),
-               'name'=>$request->input('email'),
-           ]);
-           return $this->outPutJson(200,'成功',$data);
-
-
-       }
+        $res = Redis::sadd('r_username',$request->input('email'));
+        if($res==0){
+            return $this->outPutJson(400,'用户已存在');
+        }else{
+            $res = User::where('email',$request->input('email'))->first();
+            if($res)
+            {
+                Redis::sadd('r_username',$res->email);
+                return $this->outPutJson(400,'用户已存在');
+            }
+            $data = User::create([
+                'password'=>bcrypt($request->input('password')),
+                'email'=>$request->input('email'),
+                'name'=>$request->input('email'),
+            ]);
+            return $this->outPutJson(200,'成功',$data);
+        }
     }
     public function login ()
     {
@@ -55,5 +59,9 @@ class UserController extends ApiController
     {
         $request->session()->pull('user');
         return $this->outPutJson(200,'退出登录');
+    }
+    public function userCenter()
+    {
+        return view('user.Center');
     }
 }

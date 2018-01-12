@@ -14,11 +14,57 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class TestController extends Controller
 {
-    //
-    public function index2(){
-
+    public function index()
+    {
+//        $res = Redis::sadd('r_username','liyuequn');
+        $res = Redis::smembers('r_username');
+        var_dump($res);
     }
-    public function index(){
+    //
+    public function redisList()
+    {
+        $queue = '我关注的';
+//        Redis::lpush($queue,'文学');
+//        Redis::lpush($queue,'科技');
+//        Redis::lpush($queue,'购物');
+//        Redis::rpush($queue,'PHP');
+//        Redis::rpush($queue,'JAVA');
+//        Redis::rpush($queue,'Golang');
+        $len = Redis::llen($queue);
+//        print_r($len);
+       // Redis::lset($queue,1,'hello');
+//        Redis::linsert($queue,'BEFORE','hello','world');
+//        Redis::linsert($queue,'AFTER','hello','world');
+        Redis::blpop($queue,0);
+        $list = Redis::lrange($queue,0,$len-1);
+//        $list = Redis::ltrim($queue,0,1);
+//        $list = Redis::lindex($queue,1);
+//        Redis::lrem($queue,5,'hello');
+        //print_r($list);
+    }
+    public function index2()
+    {
+        echo 1;
+        $queue = '我关注的';
+        Redis::lpush($queue,'接触阻塞');
+        $len = Redis::llen($queue);
+        $list = Redis::lrange($queue,0,$len-1);
+        print_r($list);
+    }
+    public function hash(){
+        $cacheKey = 'user';
+        $username = 'liyuequn';
+        Redis::hset($cacheKey.$username,'nickname','一手指天地');
+        $info = Redis::hget($cacheKey.$username,'nickname');
+        Redis::hmset($cacheKey.$username,'nickname','一手指天地','age',25);
+        $info = Redis::hmget($cacheKey.$username,'nickname','age');
+        $info = Redis::hlen($cacheKey.$username);
+        $info = Redis::hkeys($cacheKey.$username);
+        $info = Redis::hvals($cacheKey.$username);
+        $info = Redis::hgetall($cacheKey.$username);
+        print_r($info);
+    }
+    public function string(){
         Redis::set('username','liyuequn');
         Redis::set('username2','liyuequn2');
         Redis::get('username');
