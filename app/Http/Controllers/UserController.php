@@ -62,6 +62,6 @@ class UserController extends ApiController
     }
     public function userCenter()
     {
-        return view('user.Center');
+        return view('user.center');
     }
 }
