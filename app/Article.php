@@ -66,9 +66,8 @@ class Article extends Model
     }
     public function getTypeAttribute($value){
         $route = Route::current();
-        //return $route->methods[0];
         //当请求当是首页加载和获取文章列表当api时，返回字符串，而当返回单个文章资源当时候返回int类型
-        if($route->methods[0]=='GET'&&$route->url=="api/v1/articles/{id}"){
+        if($route->methods[0]=='GET'&&$route->uri=="api/v1/articles/{id}"){
             return $value;
         }else{
             return Type::find($value)->name;
