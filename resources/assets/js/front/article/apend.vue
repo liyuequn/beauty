@@ -14,7 +14,7 @@
                     </a>
                 </div>
                 <div class="article-footer">
-                    <button class="btn btn-default btn-xs tab right-15">{{item.title}}</button>
+                    <button class="btn btn-default btn-xs tab right-15">{{item.type}}</button>
                     <img  src="images/icon/eye.png" width="20" alt="">
                     <span class="right-15">{{item.hits}}</span>
                     <img  src="images/icon/comment.png" width="17" alt="">
