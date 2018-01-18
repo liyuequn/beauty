@@ -16,6 +16,24 @@ class TestController extends Controller
 {
     public function index()
     {
+        $str = "1,2sa,sfaw,sfa";
+        $s = '';
+        for($i=0;$i<strlen($str);$i++){
+            if($str[$i]==','){
+                $arr[]= $s;
+                $s="";
+            }else{
+                $s.=$str[$i];
+                if($i==strlen($str)-1){
+                    $arr[]= $s;
+                }
+            }
+        }
+        var_dump($arr);
+
+    }
+    public function set()
+    {
 //        $res = Redis::sadd('r_username','liyuequn');
         $res = Redis::smembers('r_username');
         var_dump($res);

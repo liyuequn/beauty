@@ -76,7 +76,7 @@
         <h1>{{$article->title}}</h1>
         <div class="author">
             <a class="avatar" href="/u/802c88dbbc05">
-                <img src="//upload.jianshu.io/users/upload_avatars/1931381/71a4c916-0559-4bcc-8153-8ba87c751110.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="96">
+                <img src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" alt="96">
             </a>
             <div class="info">
                 <span class="name"><a href="/u/802c88dbbc05">{{$article->user->name}}</a></span>
