@@ -22,12 +22,13 @@ class IndexController extends Controller
             $where[] = ['label','like',"%$label%"];
         }
         $articles = Article::where($where)->take(20)->orderBy('updated_at','post_at','desc')->get();
-        var_dump($articles);exit;
+        $where = [];
+        $recommendArticle = Article::where($where)->take(5)->orderBy('hits','desc')->get();
         $parseDown = new \Parsedown();
         foreach ($articles as $article){
             $article->content =strip_tags($parseDown->text($article->content));
         }
-        return view('index',['articles'=>$articles]);
+        return view('index',['articles'=>$articles,'recommendArticle'=>$recommendArticle]);
     }
 }
 

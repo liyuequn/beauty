@@ -38,6 +38,9 @@ Route::group(['prefix'=>'v1'],function (){
     });
     Route::post('/article/comment','CommentController@create');
     Route::get('/article/comment/{article_id}','CommentController@index');
+
+    Route::get('/books','BookController@index');
+    Route::post('/books','BookController@store');
 });
 
 

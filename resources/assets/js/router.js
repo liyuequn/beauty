@@ -57,5 +57,14 @@ let routes = [
 
         ]
     },
+    {
+        path:'/',
+        name:'书籍管理',
+        component:require('./components/admin.vue'),
+        hidden:false,
+        children:[
+            {path: '/books', name:'书籍', component: require('./components/books/list.vue'),},
+        ]
+    }
 ]
 export default routes;

@@ -47,7 +47,7 @@
         </div>
         <div class="col-md-4 visible-lg-* hidden-xs  hidden-sm">
             <div class="panel panel-primary">
-                <div class="panel-heading">推荐视频</div>
+                <div class="panel-heading">推荐资源</div>
                 <div class="panel-body">
                     <a href="/video/1">绿箭侠</a><br>
                     <a href="/video/2">闪电侠</a><br>
@@ -97,11 +97,9 @@
                 <div class="panel-heading">推荐文章</div>
                 <div class="panel-body">
                     <ul class="list-group">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Morbi leo risus</li>
-                        <li class="list-group-item">Porta ac consectetur ac</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
+                        @foreach($recommendArticle as $item)
+                            <li class="list-group-item"><a href="{{url("/p/{$article->id}")}}">{{$item->title}}</a></li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
