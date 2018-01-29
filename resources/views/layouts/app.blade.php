@@ -57,11 +57,18 @@
                                     <a href="{{url('/write')}}" class="btn btn-success write">写文章</a>
                                 @endif
                         </div>
-
+                        {{--大屏幕时显示--}}
+                        <el-input id="input1" class="visible-lg-12 visible-md-12 hidden-xs" placeholder="搜索" style="float: left;width: 50%;margin: 14px 0 0 5%;">
+                            <el-button class="search" slot="append" icon="el-icon-search"></el-button>
+                        </el-input>
+                        {{--小屏幕时显示--}}
+                        <el-input name="search"  class="hidden-lg hidden-md hidden-sm visible-xs-12" style="margin: 0 0 10px 0" placeholder="搜索">
+                            <el-button class="search"  slot="append" icon="el-icon-search"></el-button>
+                        </el-input>
                     </div>
                 </header>
             @show
-            <div class="container" style="margin:70px auto 0px;min-height: 100%;height: auto!important;">
+            <div class="container" style="margin:120px auto 0px;min-height: 100%;height: auto!important;">
             @yield('content')
                 <div id="toTop" style="position: fixed;right: 100px;bottom: 181px;right: 10%;display: none;">
                     <a href="#top" class="btn btn-primary">返回顶部</a>
@@ -107,6 +114,9 @@
                     }
                 });
             });
+            $(".search").click(function () {
+                window.location.href="?search="+$("input[name='search']").val();
+            })
             $("#logout").click(function () {
                 $.ajax({
                     headers: {

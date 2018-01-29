@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\model\Operation\OperationFactory;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,66 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class TestController extends Controller
 {
+    /**
+     *
+     */
     public function index()
+    {
+        $load = sys_getloadavg();
+       // print_r($load);
+//        $browser = get_browser();
+//        print_r($browser);
+
+    }
+    private function qsort($arr)
+    {
+        $len = count($arr);
+        if($len<=1) return $arr;
+        $left = [];
+        $right = [];
+        $key[0] = $arr[0];
+        for ($i=1;$i<$len;$i++)
+        {
+            if($arr[$i]>=$key[0]) {
+                $left[]= $arr[$i];
+            }else{
+                $right[] = $arr[$i];
+            }
+        }
+        $left = $this->qsort($left);
+        $right = $this->qsort($right);
+
+        return array_merge($left,$key,$right);
+
+    }
+    private function maopao($arr)
+    {
+        $len = count($arr);
+        for ($j=0;$j<$len-1;$j++){
+            for($i=0;$i<$len-1;$i++)
+            {
+                if($arr[$i]>$arr[$i+1])
+                {
+                    $tmp = $arr[$i];
+                    $arr[$i] = $arr[$i+1];
+                    $arr[$i+1] = $tmp;
+                }
+            }
+        }
+        return $arr;
+    }
+    public function factory()
+    {
+        $a = 10;
+        $b = 11;
+        $class = "OperationFactory";
+        $obj = new $class;
+        $res = OperationFactory::operationCreate("+");
+        $res->number1 = $a;
+        $res->number2 = $b;
+        echo $res->getResult();
+    }
+    public function reexplode()
     {
         $str = "1,2sa,sfaw,sfa";
         $s = '';
