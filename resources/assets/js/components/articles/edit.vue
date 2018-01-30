@@ -134,7 +134,7 @@
                         axios.post('/api/v1/articles',params).then((res)=>{
                             if(res.status==200){
                                 this.saveLoading = false;
-                                this.article = res.data;
+//                                this.article = res.data;
                                 _this.$message({
                                     showClose: true,
                                     message: '保存成功',
