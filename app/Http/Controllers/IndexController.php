@@ -13,10 +13,11 @@ class IndexController extends Controller
      */
     public function index(Request $request){
         $search =$request->input('search');
-        $articles = Article::whereHas(
-            'labels', function ($query) use ($search) {
-            $query->where('name', 'like', "%$search%");
-        })->take(20)->orderBy('updated_at','post_at','desc')->get();
+        $articles = Article::search($search)->get();
+//        $articles = Article::whereHas(
+//            'labels', function ($query) use ($search) {
+//            $query->where('name', 'like', "%$search%");
+//        })->take(20)->orderBy('updated_at','post_at','desc')->get();
         $where = [];
         //推荐文章
         $recommendArticles = Article::where($where)->take(5)->orderBy('hits','desc')->get();

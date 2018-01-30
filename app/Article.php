@@ -5,16 +5,17 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Route;
+use Laravel\Scout\Searchable;
 
 class Article extends Model
 {
+    use Searchable;
     /**
      * 与模型关联的数据表
      *
      * @var string
      */
-//    protected $table = 'articles';
-
+    protected $table = 'articles';
     protected $fillable = ['title','content','author_id','type','post_at'];
     /**
      * 不可被批量赋值的属性。
@@ -71,5 +72,13 @@ class Article extends Model
         }else{
             return Type::find($value)->name;
         }
+    }
+    public function toSearchableArray()
+    {
+
+        return [
+            'title' => $this->title,
+            'content' => $this->content
+        ];
     }
 }
