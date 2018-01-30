@@ -117,8 +117,12 @@
                     }
                 });
             });
+            $("input[name='search']").keydown(function(event) {
+                if (event.keyCode == 13) {
+                    window.location.href="?search="+$("input[name='search']").val();
+                }
+            })
             $(".search").click(function () {
-                console.log($("input[name='search']").val())
                 window.location.href="?search="+$("input[name='search']").val();
             })
             $("#logout").click(function () {

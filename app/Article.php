@@ -41,7 +41,6 @@ class Article extends Model
      * 获取该文章的多个标签
      */
     public function labels(){
-
         return $this->belongsToMany(Label::class);
     }
     public function countComments($article_id){

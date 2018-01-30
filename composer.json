@@ -8,7 +8,6 @@
         "php": ">=7.0.0",
         "erusev/parsedown": "^1.6",
         "fideloper/proxy": "~3.3",
-        "garveen/laravoole": "^0.5.1",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.5.*",
         "laravel/passport": "^4.0",

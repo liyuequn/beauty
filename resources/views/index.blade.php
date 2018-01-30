@@ -55,6 +55,20 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4 visible-lg-* hidden-xs  hidden-sm">
+            <div class="panel panel-primary">
+                <div class="panel-heading">热门标签</div>
+                <div class="panel-body" style="line-height: 45px;">
+                    @foreach($labels as $key => $label)
+                        <a   class="btn btn-info btn-sm" style="height: inherit" href="/?search={{$label->NAME}}">{{$label->NAME}}</a>
+                        @if($key%5 == 4)
+                            <div style="clear: both;">
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </div>
 
     </div>
     <div class="row">

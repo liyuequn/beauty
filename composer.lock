@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3b18a4d29387744a70609f706881a618",
-    "content-hash": "64a5fc755424a9d53697c92db46fc550",
+    "hash": "f876e8c680fd0ce35448fed16a48fcf1",
+    "content-hash": "186e6d7ec6fb12c154ef4a654dce6dd3",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -428,106 +428,6 @@
             "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
             "homepage": "https://github.com/firebase/php-jwt",
             "time": "2017-06-27 22:17:23"
-        },
-        {
-            "name": "garveen/fastcgi",
-            "version": "0.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/garveen/fastcgi.git",
-                "reference": "1fc385fe8cedd1f4f3a19afe6cf0303f3efb4e4e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/garveen/fastcgi/1fc385fe8cedd1f4f3a19afe6cf0303f3efb4e4e.zip",
-                "reference": "1fc385fe8cedd1f4f3a19afe6cf0303f3efb4e4e",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/psr7": "^1.3",
-                "psr/http-message": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Garveen\\FastCgi\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Gavin",
-                    "email": "acabin@live.com"
-                }
-            ],
-            "description": "An effective FastCGI to psr-7 adapter",
-            "keywords": [
-                "fastcgi",
-                "psr-7",
-                "psr7"
-            ],
-            "time": "2017-03-12 20:17:18"
-        },
-        {
-            "name": "garveen/laravoole",
-            "version": "0.5.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/garveen/laravoole.git",
-                "reference": "7891dc067120649e4ad71024a8485427ac6bb2db"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/garveen/laravoole/7891dc067120649e4ad71024a8485427ac6bb2db.zip",
-                "reference": "7891dc067120649e4ad71024a8485427ac6bb2db",
-                "shasum": ""
-            },
-            "require": {
-                "ext-posix": "*",
-                "garveen/fastcgi": "^0.1",
-                "laravel/framework": "~5.1",
-                "php": ">=5.5.16",
-                "symfony/psr-http-message-bridge": "^1.0",
-                "zendframework/zend-diactoros": "^1.3"
-            },
-            "require-dev": {
-                "adoy/fastcgi-client": "^1.0",
-                "laravel/laravel": "~5.1",
-                "phpunit/phpunit": ">4.8 <6.0",
-                "textalk/websocket": "^1.2",
-                "workerman/workerman": "^3.3"
-            },
-            "suggest": {
-                "ext-swoole": "event-based extension for best performance",
-                "workerman/workerman": "event-based library without need for any extension"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Laravoole\\": "src/",
-                    "Laravoole\\Test\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Gavin",
-                    "email": "acabin@live.com"
-                }
-            ],
-            "description": "Get 10x performance for Laravel on Swoole or Workerman",
-            "keywords": [
-                "laravel",
-                "swoole",
-                "workerman"
-            ],
-            "time": "2017-03-14 08:17:31"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1787,6 +1687,7 @@
                 "xls",
                 "xlsx"
             ],
+            "abandoned": "phpoffice/phpspreadsheet",
             "time": "2015-05-01 07:00:55"
         },
         {
@@ -2626,16 +2527,16 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v3.4.2",
+            "version": "v3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "59bf131b5460227a2f583a7dbe6b179f98f9e0a5"
+                "reference": "8c39071ac9cc7e6d8dab1d556c990dc0d2cc3d30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/http-foundation/59bf131b5460227a2f583a7dbe6b179f98f9e0a5.zip",
-                "reference": "59bf131b5460227a2f583a7dbe6b179f98f9e0a5",
+                "url": "https://files.phpcomposer.com/files/symfony/http-foundation/8c39071ac9cc7e6d8dab1d556c990dc0d2cc3d30.zip",
+                "reference": "8c39071ac9cc7e6d8dab1d556c990dc0d2cc3d30",
                 "shasum": ""
             },
             "require": {
@@ -2676,7 +2577,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2017-12-14 19:40:10"
+            "time": "2018-01-29 09:03:43"
         },
         {
             "name": "symfony/http-kernel",
@@ -3415,16 +3316,16 @@
         },
         {
             "name": "zendframework/zend-diactoros",
-            "version": "1.6.1",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-diactoros.git",
-                "reference": "c8664b92a6d5bc229e48b0923486c097e45a7877"
+                "reference": "ed6ce7e2105c400ca10277643a8327957c0384b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/zendframework/zend-diactoros/c8664b92a6d5bc229e48b0923486c097e45a7877.zip",
-                "reference": "c8664b92a6d5bc229e48b0923486c097e45a7877",
+                "url": "https://files.phpcomposer.com/files/zendframework/zend-diactoros/ed6ce7e2105c400ca10277643a8327957c0384b7.zip",
+                "reference": "ed6ce7e2105c400ca10277643a8327957c0384b7",
                 "shasum": ""
             },
             "require": {
@@ -3443,8 +3344,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6-dev",
-                    "dev-develop": "1.7-dev"
+                    "dev-master": "1.7.x-dev",
+                    "dev-develop": "1.8.x-dev"
                 }
             },
             "autoload": {
@@ -3463,7 +3364,7 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2017-10-12 15:24:51"
+            "time": "2018-01-04 18:21:48"
         }
     ],
     "packages-dev": [
