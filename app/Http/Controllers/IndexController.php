@@ -28,7 +28,11 @@ class IndexController extends Controller
         foreach ($articles as $article){
             $article->content =strip_tags($parseDown->text($article->content));
         }
-        return view('index',['articles'=>$articles,'recommendArticle'=>$recommendArticle]);
+        return view('index',[
+            'articles'=>$articles,
+            'recommendArticle'=>$recommendArticle,
+            'search'=>$search,
+        ]);
     }
 }
 

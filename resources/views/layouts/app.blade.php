@@ -59,11 +59,11 @@
                                 @endif
                         </div>
                         {{--大屏幕时显示--}}
-                        <el-input id="input1" class="visible-lg-12 visible-md-12 hidden-xs" placeholder="搜索" style="float: left;width: 50%;margin: 14px 0 0 5%;">
+                        <el-input  name="search" class="visible-lg-12 visible-md-12 hidden-xs" value="{{$search}}" placeholder="搜索" style="float: left;width: 50%;margin: 14px 0 0 5%;">
                             <el-button class="search" slot="append" icon="el-icon-search"></el-button>
                         </el-input>
                         {{--小屏幕时显示--}}
-                        <el-input name="search"  class="hidden-lg hidden-md hidden-sm visible-xs-12" style="margin: 0 0 10px 0" placeholder="搜索">
+                        <el-input name="search"  class="hidden-lg hidden-md hidden-sm visible-xs-12" value="{{$search}}" style="margin: 0 0 10px 0" placeholder="搜索">
                             <el-button class="search"  slot="append" icon="el-icon-search"></el-button>
                         </el-input>
                     </div>
@@ -116,6 +116,7 @@
                 });
             });
             $(".search").click(function () {
+                console.log($("input[name='search']").val())
                 window.location.href="?search="+$("input[name='search']").val();
             })
             $("#logout").click(function () {

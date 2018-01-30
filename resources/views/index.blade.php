@@ -98,7 +98,7 @@
                 <div class="panel-body">
                     <ul class="list-group">
                         @foreach($recommendArticle as $item)
-                            <li class="list-group-item"><a href="{{url("/p/{$article->id}")}}">{{$item->title}}</a></li>
+                            <li class="list-group-item"><a href="{{url("/p/{$item->id}")}}">{{$item->title}}</a></li>
                         @endforeach
                     </ul>
                 </div>

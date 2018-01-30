@@ -21,9 +21,13 @@ class ArticlesController extends Controller
         $author_id = $request->input('author_id');
         $type = $request->input('type');
         $title = $request->input('title');
+        $search = $request->input('search');
         $pageSize = $request->input('pageSize');
         if($title){
-            $where[] = ['title','like',"$title%"];
+            $where[] = ['title','like',"%$title%"];
+        }
+        if($search){
+            $where[] = ['title','like',"%$search%"];
         }
         if($type){
             $where[] = ['type','=',$type];

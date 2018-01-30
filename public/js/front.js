@@ -106749,7 +106749,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 spinner: 'el-icon-loading',
                 background: 'white'
             });
-            axios.get('/api/v1/articles?page=' + this.page + '&pageSize=20').then(function (res) {
+            var params = location.search.substr(1, location.search.length);
+            axios.get('/api/v1/articles?page=' + this.page + '&pageSize=20&' + params).then(function (res) {
                 res.data.data.forEach(function (item, index) {
                     _this.articles.push(item);
                 });

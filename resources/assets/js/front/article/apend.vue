@@ -58,7 +58,8 @@
                     spinner: 'el-icon-loading',
                     background: 'white'
                 });
-                axios.get('/api/v1/articles?page='+this.page+'&pageSize=20').then((res)=>{
+                var params = location.search.substr(1,location.search.length)
+                axios.get('/api/v1/articles?page='+this.page+'&pageSize=20&'+params).then((res)=>{
                     res.data.data.forEach((item,index)=>{
                         this.articles.push(item);
                     })
