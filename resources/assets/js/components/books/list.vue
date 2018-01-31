@@ -12,11 +12,11 @@
                 <el-col :span="5">
                     <el-input v-model="filter.name" placeholder="书名" @keyup.enter.native="getList()" ></el-input>
                 </el-col>
-                <el-col :span="6">
+                <el-col :span="2">
                     <el-button type="primary" plain @click="getList()">搜索</el-button>
-                    <el-button type="primary" plain @click="openDialog('bookForm')">上传书籍</el-button>
                 </el-col>
                 <el-col :span="6">
+                    <el-button type="primary" plain @click="openDialog('bookForm')">上传书籍</el-button>
                 </el-col>
             </el-row>
         </div>
@@ -33,6 +33,14 @@
                     prop="name"
                     label="书籍"
             >
+            </el-table-column>
+            <el-table-column
+                    prop="path"
+                    label="下载"
+            >
+                <template slot-scope="scope">
+                    <a :href="scope.row.path">下载</a>
+                </template>
             </el-table-column>
             <el-table-column
                     fixed="right"
@@ -82,17 +90,23 @@
                         <el-input v-model="bookForm.name" auto-complete="off"></el-input>
                     </el-form-item>
                 </el-form-item>
+                <el-form-item label="标签">
+                    <el-form-item  prop="name" required  placeholder="请填写书籍名称">
+                        <el-input v-model="bookForm.label" auto-complete="off"></el-input>
+                    </el-form-item>
+                </el-form-item>
                 <el-form-item label="摘要">
                     <el-form-item  prop="name" required  placeholder="摘要">
-                        <el-input type="textarea" v-model="bookForm.name" auto-complete="off"></el-input>
+                        <el-input type="textarea" v-model="bookForm.description" auto-complete="off"></el-input>
                     </el-form-item>
                 </el-form-item>
                 <el-form-item label="上传">
                         <el-upload
                                 class="upload-demo"
-                                action="http://www.beauty.com/api/v1/books"
+                                action="http://www.beauty.com/api/v1/files"
                                 :before-remove="beforeRemove"
                                 :limit="1"
+                                :on-success="getPath"
                                 :on-exceed="handleExceed">
                             <el-button size="small" type="primary">点击上传</el-button>
                             <div slot="tip" class="el-upload__tip">只能上传pdf文件，且不超过50M</div>
@@ -102,7 +116,7 @@
 
             <span slot="footer" class="dialog-footer">
                 <el-button @click="DialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="addType('bookForm')">确 定</el-button>
+                <el-button type="primary" @click="confirm('bookForm')">确 定</el-button>
             </span>
         </el-dialog>
     </section>
@@ -138,7 +152,8 @@
                 bookForm:{
                     name:null,
                     description:null,
-                    lable:null,
+                    label:null,
+                    path:null,
                 },
                 rules: {
                     name: [
@@ -148,7 +163,10 @@
             }
         },
         methods:{
-            addType(formName){
+            getPath:function (response, file, fileList) {
+                this.bookForm.path = response;
+            },
+            confirm(formName){
                 this.$refs[formName].validate((valid) => {
                     if(valid){
                         this.DialogVisible = false;
@@ -167,7 +185,6 @@
                 this.bookForm.name = row.name;
             },
             openDialog(){
-                this.bookForm.name=null;
                 this.DialogVisible = true;
                 this.dialogTitle = '上传书籍';
             },
@@ -180,7 +197,8 @@
                 }
                 axios.get('/api/v1/books',{params}).then((res)=>{
                     this.loading = false;
-                    this.tableData = res.data.data;
+                    this.tableData = res.data;
+                    console.log(res)
 //                    this.total = res.data.meta.total;
                 })
             },

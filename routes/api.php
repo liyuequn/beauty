@@ -39,8 +39,11 @@ Route::group(['prefix'=>'v1'],function (){
     Route::post('/article/comment','CommentController@create');
     Route::get('/article/comment/{article_id}','CommentController@index');
 
+    Route::post('/files','UploadController@store');
+
     Route::get('/books','BookController@index');
     Route::post('/books','BookController@store');
+    Route::delete('/books/{id}','BookController@delete');
 });
 
 

@@ -60,12 +60,12 @@
                         </div>
                         {{--大屏幕时显示--}}
                         @if(Request::path()=='/')
-                        <el-input  name="search" class="visible-lg-12 visible-md-12 hidden-xs" value="{{$search?$search:''}}" placeholder="搜索" style="float: left;width: 50%;margin: 14px 0 0 5%;">
-                            <el-button class="search" slot="append" icon="el-icon-search"></el-button>
+                        <el-input  name="search1" class="visible-lg-12 visible-md-12 hidden-xs" value="{{$search?$search:''}}" placeholder="搜索" style="float: left;width: 50%;margin: 14px 0 0 5%;">
+                            <el-button class="search1" slot="append" icon="el-icon-search"></el-button>
                         </el-input>
                         {{--小屏幕时显示--}}
-                        <el-input name="search"  class="hidden-lg hidden-md hidden-sm visible-xs-12" value="{{$search?$search:''}}" style="margin: 0 0 10px 0" placeholder="搜索">
-                            <el-button class="search"  slot="append" icon="el-icon-search"></el-button>
+                        <el-input name="search2" v-if="" class="hidden-lg hidden-md hidden-sm visible-xs-12" value="{{$search?$search:''}}" style="margin: 0 0 10px 0" placeholder="搜索">
+                            <el-button class="search2"  slot="append" icon="el-icon-search"></el-button>
                         </el-input>
                         @endif
                     </div>
@@ -117,36 +117,47 @@
                     }
                 });
             });
-            $("input[name='search']").keydown(function(event) {
-                if (event.keyCode == 13) {
-                    window.location.href="?search="+$("input[name='search']").val();
-                }
-            })
-            $(".search").click(function () {
-                window.location.href="?search="+$("input[name='search']").val();
-            })
-            $("#logout").click(function () {
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type: "POST",
-                    url: "/logout",
-                    success: function (msg) {
-                        sessionStorage.removeItem('userId');
-                        sessionStorage.removeItem('userInfo');
-                        sessionStorage.removeItem('access_token')
-                        sessionStorage.removeItem('refresh_token')
-                        sessionStorage.removeItem('token_type')
-                        window.location.href = '/';
-                        console.log(msg)
-
-                    },
-                    error: function (error) {
-                        console.log(error);
+            $(function () {
+                $("input[name='search1']").keydown(function(event) {
+                    if (event.keyCode == 13) {
+                        window.location.href="?search="+$("input[name='search1']").val();
                     }
-                });
+                })
+                $(".search1").click(function () {
+                    window.location.href="?search="+$("input[name='search1']").val();
+                })
+                $("input[name='search2']").keydown(function(event) {
+                    if (event.keyCode == 13) {
+                        window.location.href="?search="+$("input[name='search2']").val();
+                    }
+                })
+                $(".search2").click(function () {
+                    window.location.href="?search="+$("input[name='search2']").val();
+                })
+                $("#logout").click(function () {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: "POST",
+                        url: "/logout",
+                        success: function (msg) {
+                            sessionStorage.removeItem('userId');
+                            sessionStorage.removeItem('userInfo');
+                            sessionStorage.removeItem('access_token')
+                            sessionStorage.removeItem('refresh_token')
+                            sessionStorage.removeItem('token_type')
+                            window.location.href = '/';
+                            console.log(msg)
+
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                })
             })
+
         </script>
         @yield('script')
 

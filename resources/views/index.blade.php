@@ -16,42 +16,26 @@
 @section('content')
     <div class="row">
         <div class="col-md-8">
-            <div id="carousel-example-generic" class="carousel slide banner" data-ride="carousel">
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1512116377644&di=671380ec5ab6c5795bc3797af929909a&imgtype=0&src=http%3A%2F%2Fimage.tianjimedia.com%2FuploadImages%2F2014%2F340%2F24%2F2EOENARNOWUU_1000x500.jpg" alt="...">
-                        <div class="carousel-caption">
+            <el-carousel :interval="5000" arrow="always">
+                <el-carousel-item>
+                    <img width="100%" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1512116377644&di=671380ec5ab6c5795bc3797af929909a&imgtype=0&src=http%3A%2F%2Fimage.tianjimedia.com%2FuploadImages%2F2014%2F340%2F24%2F2EOENARNOWUU_1000x500.jpg" alt="">
+                </el-carousel-item>
+                <el-carousel-item>
+                    <img width="100%" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1512118118295&di=bc8089d9d5ac8c2cb76e2fba760a7cca&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D199734178%2C804954580%26fm%3D214%26gp%3D0.jpg" alt="">
+                </el-carousel-item>
+                <el-carousel-item>
+                    <img width="100%" src="https://upload.jianshu.io/admin_banners/web_images/4144/0ebdf5944bf8ec3bfa01aa3da45874351b719544.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/1250/h/540" alt="">
+                </el-carousel-item>
+            </el-carousel>
 
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1512118118295&di=bc8089d9d5ac8c2cb76e2fba760a7cca&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D199734178%2C804954580%26fm%3D214%26gp%3D0.jpg" alt="">
-                        <div class="carousel-caption">
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Controls -->
-                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="false"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="false"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
         </div>
         <div class="col-md-4 visible-lg-* hidden-xs  hidden-sm">
             <div class="panel panel-primary">
                 <div class="panel-heading">推荐资源</div>
                 <div class="panel-body">
-                    <a href="/video/1">绿箭侠</a><br>
-                    <a href="/video/2">闪电侠</a><br>
-                    <a href="/video/3">吸血鬼日记</a><br>
+                    @foreach($books as $book)
+                    <a  style="height: inherit"  href="{{$book->path}}">{{$book->name}}</a>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -121,9 +105,5 @@
     </div>
 @endsection
 @section('script')
-    <script>
-        $('.carousel').carousel({
-            interval: 5000
-        })
-    </script>
+
 @endsection

@@ -4,21 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
     //
     public function index(Request $request)
     {
-        return DB::table('books')->get();
+        $page = $request->input('page',0);
+        $pageSize = $request->input('pageSize',10);
+        return Book::skip(($page-1)*$pageSize)->take($pageSize)->get();
     }
-    public function store(Request $request){
-        $path = $request->file('file')->store('file');
-        return $path;
-    }
-    public function update(Request $request)
+    public function store(Request $request)
     {
          Book::create($request->all());
+    }
+    public function delete($id){
+        Book::find($id)->delete();
+        $file = new UploadController();
+        return $file->delete($id);
     }
 }
