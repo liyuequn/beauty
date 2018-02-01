@@ -80,26 +80,7 @@
             </div>
             @yield('footer')
             <div class="footer" style="margin-top: -200px;">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <span class="footer-title">友情链接：</span>
-                            <ul style="list-style-type:none;">
-                                <li>百度</li>
-                                <li>百度</li>
-                                <li>百度</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-3">
-                            <span class="footer-title">统计信息：</span>
-                            <ul style="list-style-type:none;">
-                                <li>文章数：10000</li>
-                                <li>用户数：10000</li>
-                                <li>评论数：10000</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div style="bottom: 0px;text-align: center;">
+                    <div style="bottom: 0px;text-align: center;margin-top: 4%;">
                         本博客致力于技术的锻炼和总结，作为一名独立开发者，初衷是想把所有的先进技术都能从本博客上进行演练，并分享出来。
                         Designed by liyuequn
                     </div>
