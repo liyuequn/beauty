@@ -103,7 +103,7 @@
                 <el-form-item label="上传">
                         <el-upload
                                 class="upload-demo"
-                                action="http://www.beauty.com/api/v1/files"
+                                action="/api/v1/files"
                                 :before-remove="beforeRemove"
                                 :limit="1"
                                 :on-success="getPath"
