@@ -15,6 +15,7 @@ Route::get('/backend', function () {
     return view('backend');
 });
 Route::get('/', 'IndexController@index');
+Route::get('/articles/{search}', 'IndexController@index');
 Route::get('/p/{id}','ArticlesController@detail');
 Route::post('/login','Auth\LoginController@login');
 Route::post('/auth','Auth\LoginController@auth');//自动登录

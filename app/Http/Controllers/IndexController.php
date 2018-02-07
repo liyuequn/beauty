@@ -12,8 +12,7 @@ class IndexController extends Controller
     /**
      * 首页包括文章资源
      */
-    public function index(Request $request){
-        $search =$request->input('search');
+    public function index($search = ''){
         if($search){
             $articles = Article::search($search)->get();
         }else{

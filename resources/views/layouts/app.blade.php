@@ -10,7 +10,7 @@
     <link rel="icon" href="{{asset('images/icon/Beauty.png')}}" type="image/x-icon"/>
     <title>@yield('title')</title>
     <style>
-        .navbar-brand1{border: 1px solid #f0f0f0;position: fixed;height:auto;top:0;z-index:2;background-color: white;  }
+        .navbar-brand1{border: 1px solid #f0f0f0;position: fixed;height:auto;top:0;z-index:5;background-color: white;  }
         .login{width: 60px;border-radius:20px;color: white; margin:15px 10px 15px 10px}
         .register{width: 60px;border-radius:20px;color: white;margin-left: 10px;margin-right: 10px; }
         body{background-color: white;}
@@ -23,6 +23,7 @@
         .footer-title{font-size: 16px;}
         .footer{background-color: #3798CF;min-height: 200px;color: white;padding: 20px 0px 20px 0px ;width: 100%;text-align: center;}
         body,html{height: 100%;}
+        .main{margin:80px auto 0px;min-height: 100%;height: auto!important;}
     </style>
     @yield('style')
 </head>
@@ -71,7 +72,7 @@
                     </div>
                 </header>
             @show
-            <div class="container" style="margin:120px auto 0px;min-height: 100%;height: auto!important;">
+            <div class="container main">
             @yield('content')
                 <div id="toTop" style="position: fixed;right: 100px;bottom: 181px;right: 10%;display: none;">
                     <a href="#top" class="btn btn-primary">返回顶部</a>

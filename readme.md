@@ -23,3 +23,5 @@ php artisan passport:client --password
 ```
 ### 生成应用密钥
 php artisan key:generate
+### 文件访问
+php artisan storage:link

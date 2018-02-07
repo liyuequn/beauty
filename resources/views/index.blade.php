@@ -10,24 +10,21 @@
     .article .col-md-8 {padding: 0;}
     .article .col-md-4 {padding-right: 0;}
     .right-15{margin-right: 15px;}
+    .lunbo{height:230px!important;}
 </style>
 @extends('layouts.app')
 @section('title', 'Index')
 @section('content')
     <div class="row">
         <div class="col-md-8">
-            <el-carousel :interval="5000" arrow="always">
+            <el-carousel class="lunbo" :interval="5000" arrow="always">
                 <el-carousel-item>
                     <img width="100%" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1512116377644&di=671380ec5ab6c5795bc3797af929909a&imgtype=0&src=http%3A%2F%2Fimage.tianjimedia.com%2FuploadImages%2F2014%2F340%2F24%2F2EOENARNOWUU_1000x500.jpg" alt="">
                 </el-carousel-item>
                 <el-carousel-item>
                     <img width="100%" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1512118118295&di=bc8089d9d5ac8c2cb76e2fba760a7cca&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D199734178%2C804954580%26fm%3D214%26gp%3D0.jpg" alt="">
                 </el-carousel-item>
-                <el-carousel-item>
-                    <img width="100%" src="https://upload.jianshu.io/admin_banners/web_images/4144/0ebdf5944bf8ec3bfa01aa3da45874351b719544.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/1250/h/540" alt="">
-                </el-carousel-item>
             </el-carousel>
-
         </div>
         <div class="col-md-4 visible-lg-* hidden-xs  hidden-sm">
             <div class="panel panel-primary">
@@ -44,7 +41,7 @@
                 <div class="panel-heading">热门标签</div>
                 <div class="panel-body" style="line-height: 45px;">
                     @foreach($labels as $key => $label)
-                        <a   class="btn btn-info btn-sm" style="height: inherit" href="/?search={{$label->NAME}}">{{$label->NAME}}</a>
+                        <a   class="btn btn-info btn-sm" style="height: inherit" href="/articles/{{$label->NAME}}">{{$label->NAME}}</a>
                         @if($key%5 == 4)
                             <div style="clear: both;">
                             </div>
