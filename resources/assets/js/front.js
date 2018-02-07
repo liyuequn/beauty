@@ -1,7 +1,6 @@
 require('./bootstrap');
 import Vue from 'vue'
 import {
-    Pagination,
     Input,
     Button,
     Form,
@@ -10,8 +9,6 @@ import {
     Col,
     Carousel,
     CarouselItem,
-    Collapse,
-    CollapseItem,
     Loading,
     Message,
     DatePicker,
@@ -19,7 +16,6 @@ import {
     Option,
 } from 'element-ui'
 
-Vue.use(Pagination)
 Vue.use(Input)
 Vue.use(Button)
 Vue.use(Form)
@@ -28,8 +24,6 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(Carousel)
 Vue.use(CarouselItem)
-Vue.use(Collapse)
-Vue.use(CollapseItem)
 Vue.use(DatePicker)
 Vue.use(Select)
 Vue.use(Option)
