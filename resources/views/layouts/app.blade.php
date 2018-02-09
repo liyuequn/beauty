@@ -102,19 +102,19 @@
             $(function () {
                 $("input[name='search1']").keydown(function(event) {
                     if (event.keyCode == 13) {
-                        window.location.href="?search="+$("input[name='search1']").val();
+                        window.location.href="/articles/"+$("input[name='search1']").val();
                     }
                 })
                 $(".search1").click(function () {
-                    window.location.href="?search="+$("input[name='search1']").val();
+                    window.location.href="/articles/"+$("input[name='search1']").val();
                 })
                 $("input[name='search2']").keydown(function(event) {
                     if (event.keyCode == 13) {
-                        window.location.href="?search="+$("input[name='search2']").val();
+                        window.location.href="/articles/"+$("input[name='search2']").val();
                     }
                 })
                 $(".search2").click(function () {
-                    window.location.href="?search="+$("input[name='search2']").val();
+                    window.location.href="/articles/"+$("input[name='search2']").val();
                 })
                 $("#logout").click(function () {
                     $.ajax({
