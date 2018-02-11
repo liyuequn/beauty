@@ -45,7 +45,7 @@
                     }).catch((error)=>{
 
                     })
-//                    window.location.href="/";
+                    window.location.href="/";
                 }).catch(function (error) {
                     if(error.response.status==500){
                         _this.$message.error('系统错误');

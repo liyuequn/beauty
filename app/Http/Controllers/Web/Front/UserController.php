@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Web\Front;
 
 use App\Http\Controllers\Api\ApiController;
-use App\models\User;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;

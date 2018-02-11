@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\models\User;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -78,6 +78,7 @@ class LoginController extends Controller
             'oauth/token',
             'POST'
         );
+
         $response = Route::dispatch($proxy);
         return $response;
     }

@@ -81726,7 +81726,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     sessionStorage.setItem('userInfo', JSON.stringify(res.data));
                     sessionStorage.setItem('userId', res.data.id);
                 }).catch(function (error) {});
-                //                    window.location.href="/";
+                window.location.href = "/";
             }).catch(function (error) {
                 if (error.response.status == 500) {
                     _this.$message.error('系统错误');
