@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\Front;
 
-use App\Comment;
+use App\models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Resources\Comment as CommentCollection;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redis;
 
 class CommentController extends Controller
 {

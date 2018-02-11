@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\Backend;
 
-use App\Article;
-use App\ArticleLabel;
+use App\models\Article;
+use App\models\ArticleLabel;
+use App\models\Label;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\ArticleResource;
-use App\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -37,7 +38,7 @@ class ArticlesController extends Controller
         }
         return ArticleResource::collection
         (
-            \App\Article::where($where)->orderBy('created_at','desc')->paginate($pageSize)
+            Article::where($where)->orderBy('created_at','desc')->paginate($pageSize)
 
         );
     }
@@ -67,18 +68,6 @@ class ArticlesController extends Controller
         $article->label = $request->input('label');
         return $article;
     }
-
-    /**
-     *
-     */
-    public function detail($id){
-        $article = Article::find($id);
-        Article::where('id',$id)->update(['hits'=>$article->hits+1]);
-        $Parsedown = new \Parsedown();
-        $article->content =  $Parsedown->text($article->content);
-        return view('article.index',['article'=>$article]);
-    }
-
     public function detailApi($id)
     {
         $article = Article::find($id);

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\Backend;
 
 use App\Http\Resources\LabelsCollection;
-use App\Label;
+use App\models\Label;
 use Illuminate\Http\Request;
 
 class LabelsController extends Controller

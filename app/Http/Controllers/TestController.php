@@ -20,6 +20,7 @@ class TestController extends Controller
      */
     public function index()
     {
+        echo 1;exit;
         $load = sys_getloadavg();
        // print_r($load);
 //        $browser = get_browser();

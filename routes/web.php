@@ -14,26 +14,19 @@
 Route::get('/backend', function () {
     return view('backend');
 });
-Route::get('/', 'IndexController@index');
-Route::get('/articles/{search}', 'IndexController@index');
-Route::get('/p/{id}','ArticlesController@detail');
+Route::get('/', 'Web\Front\IndexController@index');
+Route::get('/articles/{search}', 'Web\Front\IndexController@index');
+Route::get('/p/{id}','Web\Front\ArticlesController@show');
 Route::post('/login','Auth\LoginController@login');
 Route::post('/auth','Auth\LoginController@auth');//自动登录
 Route::get('/test','TestController@index');
-Route::get('/test2','TestController@index2');
 Route::get('/commentsIn','CommentController@insertComments');
-Route::get('/video/{id}','VideoController@index');
-Route::post('/sendMessage','MessageController@create');
-Route::get('/readMessage/{id}','MessageController@read');
-Route::get('/receiveMessage/{send_to_id}/sys/{sys}','MessageController@index');
-Route::get('/websocket','TestController@index');
-
-Route::get('/login','UserController@login');
-Route::get('/user/center','UserController@userCenter');
-Route::get('/register','UserController@register');
-Route::post('/signUp','UserController@store');
-Route::post('/signIn','UserController@signIn');
-Route::post('/logout','UserController@logout');
+Route::get('/login','Web\Front\UserController@login');
+Route::get('/user/center','Web\Front\UserController@userCenter');
+Route::get('/register','Web\Front\UserController@register');
+Route::post('/signUp','Web\Front\UserController@store');
+Route::post('/signIn','Web\Front\UserController@signIn');
+Route::post('/logout','Web\Front\UserController@logout');
 Route::get('/write',function (){
     return view('article.write');
 })->middleware(\App\Http\Middleware\CheckLogin::class);

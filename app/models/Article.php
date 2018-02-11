@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,7 +34,7 @@ class Article extends Model
 
     public function user(){
 
-        return $this->belongsTo('App\User','author_id');
+        return $this->belongsTo('App\models\User','author_id');
     }
 
     /**

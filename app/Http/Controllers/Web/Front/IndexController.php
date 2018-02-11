@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web\Front;
 
-use App\Article;
-use App\Book;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\models\Article;
+use App\models\Book;
 use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller

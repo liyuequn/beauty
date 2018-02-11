@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\Backend;
 
 
 use App\Http\Resources\TypesCollection;
-use App\Type;
+use App\models\Type;
 use Illuminate\Http\Request;
 
 class TypesController extends Controller

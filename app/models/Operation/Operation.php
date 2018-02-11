@@ -1,5 +1,5 @@
 <?php
-namespace App\model\Operation;
+namespace App\models\Operation;
 class Operation{
     private $number1;
     private $number2;

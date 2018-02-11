@@ -1,5 +1,5 @@
 <?php
-namespace App\model\Operation;
+namespace App\models\Operation;
 class OperationAdd extends Operation {
     public function getResult()
     {
