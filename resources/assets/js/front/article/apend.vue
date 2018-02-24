@@ -39,6 +39,7 @@
                 scrollTop: '',
                 clientHeight:'',
                 scrollHeight:'',
+                articleList:[],
             }
         },
         methods:{
@@ -60,18 +61,19 @@
                 });
                 var params = location.search.substr(1,location.search.length)
                 axios.get('/api/v1/articles?page='+this.page+'&pageSize=20&'+params).then((res)=>{
-                    res.data.data.forEach((item,index)=>{
-                        this.articles.push(item);
-                    })
                     loading.close();
-                    if(res.data.data.length==0){
-                        this.$message({
-                           showClose: true,
-                           message: '已经到底了，没有更多文章了',
-                           type: 'success'
-                       });
-                    }
+                    this.articleList = res.data.data;
                 });
+                if(this.articleList.length==0){
+                    this.$message({
+                        showClose: true,
+                        message: '已经到底了，没有更多文章了',
+                        type: 'success'
+                    });
+                }
+                this.articleList.forEach((item,index)=>{
+                    this.articles.push(item);
+                })
             }
         },
         mounted(){
