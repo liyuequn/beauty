@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Backend;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\LabelsCollection;
 use App\models\Label;
 use Illuminate\Http\Request;

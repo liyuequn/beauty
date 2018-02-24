@@ -17,7 +17,7 @@ Route::group(['prefix'=>'v1'],function (){
         return $request->user();
     });
     Route::middleware('auth:api')->get('/users',function (){
-        return new \App\Http\Resources\UserCollection(\App\models\User::all());
+        return new \App\Http\Resources\UserCollection(\App\User::all());
     });
     Route::middleware('auth:api')->post('/articles','Api\Backend\ArticlesController@store');
     Route::middleware('auth:api')->get('/articles/{id}', 'Api\Backend\ArticlesController@detailApi');
@@ -25,14 +25,14 @@ Route::group(['prefix'=>'v1'],function (){
         \App\models\Article::find($id)->delete();
     });
     Route::get('/articles','Api\Backend\ArticlesController@index');
-    Route::middleware('auth:api')->post('/types','TypesController@store');
+    Route::middleware('auth:api')->post('/types','Api\Backend\TypesController@store');
     Route::middleware('auth:api')->post('/image/upload','Api\FilesController@ImageUpload');
-    Route::middleware('auth:api')->get('/types','TypesController@index');
+    Route::middleware('auth:api')->get('/types','Api\Backend\TypesController@index');
     Route::middleware('auth:api')->delete('/types/{id}', function ($id) {
         \App\models\Type::find($id)->delete();
     });
-    Route::middleware('auth:api')->post('/labels','LabelsController@store');
-    Route::middleware('auth:api')->get('/labels','LabelsController@index');
+    Route::middleware('auth:api')->post('/labels','Api\Backend\LabelsController@store');
+    Route::middleware('auth:api')->get('/labels','Api\Backend\LabelsController@index');
     Route::middleware('auth:api')->delete('/labels/{id}', function ($id) {
         \App\models\Label::find($id)->delete();
     });

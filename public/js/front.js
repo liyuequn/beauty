@@ -55918,7 +55918,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     axios.post('/api/v1/articles', params).then(function (res) {
                         if (res.status == 200) {
                             _this2.saveLoading = false;
-                            //                                this.article = res.data;
+                            _this2.article.id = res.data.id;
                             _this.$message({
                                 showClose: true,
                                 message: '保存成功',

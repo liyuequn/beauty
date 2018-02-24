@@ -20,12 +20,9 @@ class TestController extends Controller
      */
     public function index()
     {
-        echo 1;exit;
-        $load = sys_getloadavg();
-       // print_r($load);
-//        $browser = get_browser();
-//        print_r($browser);
-
+        $client = new Client();
+        $res = $client->get("https://www.sijiaomao.com/video/135");
+        file_put_contents("test.mp4",$res);
     }
     private function qsort($arr)
     {

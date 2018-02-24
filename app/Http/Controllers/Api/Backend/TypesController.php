@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Backend;
 
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\TypesCollection;
 use App\models\Type;
 use Illuminate\Http\Request;
