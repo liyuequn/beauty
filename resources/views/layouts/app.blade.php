@@ -56,7 +56,7 @@
                                             <li><a href="javascript:;" id="logout"> <img width="20" src="{{asset('images/icon/logout.png')}}" alt=""> 退出</a></li>
                                         </ul>
                                     </div>
-                                    <a href="{{url('/write')}}" class="btn btn-success write">写文章</a>
+                                    <a href="{{url('/write')}}" class="btn btn-primary write">写文章</a>
                                 @endif
                         </div>
                         {{--大屏幕时显示--}}

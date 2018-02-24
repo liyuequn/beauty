@@ -81,7 +81,7 @@
             <div class="info">
                 <span class="name"><a href="/u/802c88dbbc05">{{$article->user->name}}</a></span>
                 <!-- 关注用户按钮 -->
-                <a class="btn btn-success follow"><i class="iconfont ic-follow"></i><span>关注</span></a>
+                <a class="btn btn-primary follow"><i class="iconfont ic-follow"></i><span>关注</span></a>
                 <!-- 文章数据信息 -->
                 <div class="meta">
                     <!-- 如果文章更新时间大于发布时间，那么使用 tooltip 显示更新时间 -->
@@ -95,7 +95,7 @@
             </div>
             <!-- 如果是当前作者，加入编辑按钮 -->
             @if($article->author_id==session('userId'))
-                <a href="/article/edit/{{$article->id}}" class="btn btn-success" style="margin-left: 10%;display: inline;">
+                <a href="/article/edit/{{$article->id}}" class="btn btn-primary" style="margin-left: 10%;display: inline;">
                     编辑
                 </a>
             @endif
