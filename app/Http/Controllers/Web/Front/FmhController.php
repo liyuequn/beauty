@@ -11,21 +11,15 @@ use Illuminate\Http\Request;
 class FmhController extends Controller
 {
     //
-    public function store(Request $request)
+    public function index(Request $request)
     {
-        $url = $request->input('url');
         $client = new Client();
-        $wechatPostSpider = new WechatPostSpider($client, $url);
-        $this->savePost($wechatPostSpider);
+        $crawler = $client->request('GET', $request->input('wechat_url'));
+        $title = $crawler->filter('title')->html();
+        $content = $crawler->filter('.rich_media_content')->html();
+        $content = str_replace('data-src="','src=/image?url=',$content);
+
+        echo ("<h1>$title</h1>".'<div style="text-align: center">'.$content.'</div>');
     }
-    protected function savePost(WechatPostSpider $wechatPostSpider)
-    {
-        $arr = [
-            'url' => $wechatPostSpider->getUrl(),
-            'author' => $wechatPostSpider->getAuthor(),
-            'title' => $wechatPostSpider->getTitle(),
-            'content' => $wechatPostSpider->getContent(),
-            'post_date' => $wechatPostSpider->getPostDate(),
-        ];
-    }
+
 }

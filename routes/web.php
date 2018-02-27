@@ -35,9 +35,9 @@ Route::get('/article/edit/{id}',function (){
     return view('article.write');
 });
 Route::get('/fmh',function (){
-    return view('article.post',['url'=>'fmh']);
+    return view('article.fmh');
 });
-Route::post('/fmh','Web\Front\FmhController@store');
+Route::post('/fmh','Web\Front\FmhController@index');
 Route::get('/image','Web\Backend\ProxyImageController@index');
 Route::get('/reprint',function (){
     return view('article.post',['url'=>'api/v1/reprint']);

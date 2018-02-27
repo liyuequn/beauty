@@ -26,14 +26,7 @@ class TestController extends Controller
         $content = str_replace('data-src="','src=/image?url=',$content);
         echo ('<div style="text-align: center">'.$content.'</div>');
         die();
-        $content = '<div style="text-align: center">'.$content.'</div>';
-        \App\models\Article::create([
-            'title'=>'test',
-            'content'=>$content,
-            'author_id'=>1,
-            'type'=>1,
-            'post_at'=>'2021-10-10',
-        ]);
+
 
         exit;
         die();
