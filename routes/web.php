@@ -20,6 +20,7 @@ Route::get('/p/{id}','Web\Front\ArticlesController@show');
 Route::post('/login','Auth\LoginController@login');
 Route::post('/auth','Auth\LoginController@auth');//自动登录
 Route::get('/test','TestController@index');
+Route::get('/test2','TestController@index2');
 Route::get('/commentsIn','CommentController@insertComments');
 Route::get('/login','Web\Front\UserController@login');
 Route::get('/user/center','Web\Front\UserController@userCenter');
@@ -32,6 +33,14 @@ Route::get('/write',function (){
 })->middleware(\App\Http\Middleware\CheckLogin::class);
 Route::get('/article/edit/{id}',function (){
     return view('article.write');
+});
+Route::get('/fmh',function (){
+    return view('article.post',['url'=>'fmh']);
+});
+Route::post('/fmh','Web\Front\FmhController@store');
+Route::get('/image','Web\Backend\ProxyImageController@index');
+Route::get('/reprint',function (){
+    return view('article.post',['url'=>'api/v1/reprint']);
 });
 
 

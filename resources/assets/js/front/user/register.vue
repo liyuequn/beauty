@@ -83,6 +83,8 @@
                             verifyCode:this.signUpForm.verifyCode,
                         }
                         axios.post('/signUp',param).then((res)=>{
+                            console.log(res)
+                            return
                             if(res.status==200){
                                 _this.$message({
                                     showClose: true,

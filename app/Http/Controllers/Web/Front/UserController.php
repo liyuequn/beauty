@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;
+use Mockery\Exception;
 
 
 class UserController extends ApiController
@@ -16,24 +17,38 @@ class UserController extends ApiController
     {
         return view('user.register');
     }
+    public function isRegistered(Request $request)
+    {
+        $res = User::isRegistered($request->input('email'));
+        if(0==$res){
+            return $this->outPutJson(400,'用户已存在');
+        }
+        return $this->outPutJson(200,'用户名可用');
+    }
     public function store (Request $request)
     {
-        $res = Redis::sadd('r_username',$request->input('email'));
-        if($res==0){
-            return $this->outPutJson(400,'用户已存在');
-        }else{
-            $res = User::where('email',$request->input('email'))->first();
-            if($res)
-            {
-                Redis::sadd('r_username',$res->email);
+        try{
+            $res = User::isRegistered($request->input('email'));
+            if(1 == $res){
                 return $this->outPutJson(400,'用户已存在');
+            }else{
+                $redisRes = Redis::sadd('r_username',$request->input('email'));
+                if($redisRes){
+                    $data = User::create([
+                        'password'=>bcrypt($request->input('password')),
+                        'email'=>$request->input('email'),
+                        'name'=>$request->input('email'),
+                    ]);
+                    if($data){
+                        return $this->outPutJson(200,'成功',$data);
+                    }else{//删除缓存
+                        Redis::srem('r_username',$request->input('email'));
+                    }
+                }
             }
-            $data = User::create([
-                'password'=>bcrypt($request->input('password')),
-                'email'=>$request->input('email'),
-                'name'=>$request->input('email'),
-            ]);
-            return $this->outPutJson(200,'成功',$data);
+
+        }catch (Exception $exception){
+            return $this->outPutJson(500,'注册失败，数据异常');
         }
     }
     public function login ()

@@ -44,6 +44,7 @@ Route::group(['prefix'=>'v1'],function (){
     Route::get('/books','Api\Backend\BookController@index');
     Route::post('/books','Api\Backend\BookController@store');
     Route::delete('/books/{id}','Api\Backend\BookController@delete');
+    Route::middleware('auth:api')->post('/reprint','Api\Backend\ArticlesController@reprint');
 });
 
 

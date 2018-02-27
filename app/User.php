@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Redis;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,4 +28,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @param $username
+     * @return mixed
+     */
+    public static function isRegistered($username){
+        return Redis::sismember('r_username',$username);
+    }
 }

@@ -18,11 +18,47 @@ class TestController extends Controller
     /**
      *
      */
-    public function index()
+    public function index(Request $request)
     {
-        $client = new Client();
-        $res = $client->get("https://www.sijiaomao.com/video/135");
-        file_put_contents("test.mp4",$res);
+        $client = new \Goutte\Client();
+        $crawler = $client->request('GET', 'https://mp.weixin.qq.com/s/1rRSkjXM2tS-lGEsVe-MvA');
+        $content = $crawler->filter('.rich_media_content')->html();
+        $content = str_replace('data-src="','src=/image?url=',$content);
+        echo ('<div style="text-align: center">'.$content.'</div>');
+        die();
+        $content = '<div style="text-align: center">'.$content.'</div>';
+        \App\models\Article::create([
+            'title'=>'test',
+            'content'=>$content,
+            'author_id'=>1,
+            'type'=>1,
+            'post_at'=>'2021-10-10',
+        ]);
+
+        exit;
+        die();
+        $res = token_get_all('<?php $name = liyuequn ?>');
+        echo '<pre>';
+        print_r($res);exit;
+        exit;
+        echo "1<br>";
+        echo "1<br>";
+        echo "1<br>";
+        exit;
+//        rmdir("/Users/liyuequn/beauty/storage/helloworld");
+//        exit;
+        $output = shell_exec("rmdir /Users/liyuequn/beauty/storage/helloworld");
+        echo $output;exit;
+        $data = "RF Online has been officially rele按钮功ased for";
+        preg_match_all('/\w+/',$data,$matches,PREG_OFFSET_CAPTURE);
+        var_dump($matches);exit;
+
+    }
+    public function index2(Request $request){
+        $url = $request->input('url');
+        header("content-type:image/jpeg");
+        echo file_get_contents($url);
+        die();
     }
     private function qsort($arr)
     {
@@ -118,7 +154,7 @@ class TestController extends Controller
 //        Redis::lrem($queue,5,'hello');
         //print_r($list);
     }
-    public function index2()
+    public function index3()
     {
         echo 1;
         $queue = '我关注的';

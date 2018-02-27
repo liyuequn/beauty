@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Api\Backend;
 
+use App\Helpers\WechatPostSpider;
 use App\models\Article;
 use App\models\ArticleLabel;
 use App\models\Label;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ArticleResource;
+use Goutte\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ArticlesController extends Controller
@@ -78,5 +81,25 @@ class ArticlesController extends Controller
         $labels = substr($labels,0,-1);
         $article->label = $labels;
         return $article;
+    }
+
+    //转载文章
+    public function reprint(Request $request)
+    {
+        $url = $request->input('url');
+        $client = new Client();
+        $wechatPostSpider = new WechatPostSpider($client, $url);
+        return $this->savePost($wechatPostSpider);
+    }
+    public function savePost($wechatPostSpider)
+    {
+        return Article::create([
+            'wechat_url' => $wechatPostSpider->getUrl(),
+            'author_id' => Auth::user()->id,
+            'type' => 1,
+            'title' => $wechatPostSpider->getTitle().'--(转)',
+            'content' => $wechatPostSpider->getContent(),
+            'post_at' => $wechatPostSpider->getPostDate(),
+        ]);
     }
 }

@@ -19,7 +19,7 @@
         .logo{float: left;line-height:66px;font-size:22px;}
         .person-center{float: right;height: 100%;}
         .person-center >.dropdown{float: left;height:66px;margin-right: 20px;}
-        .write{float: left;height: 50px;margin-top: 8px;line-height: 34px;font-size: 16px;}
+        .write{float: left;height: 50px;margin-top: 8px;line-height: 34px;font-size: 16px;margin-left: 5px;}
         .footer-title{font-size: 16px;}
         .footer{background-color: #3798CF;min-height: 200px;color: white;padding: 20px 0px 20px 0px ;width: 100%;text-align: center;}
         body,html{height: 100%;}
@@ -57,6 +57,7 @@
                                         </ul>
                                     </div>
                                     <a href="{{url('/write')}}" class="btn btn-primary write">写文章</a>
+                                    <a href="{{url('/reprint')}}" class="btn btn-primary write">转文章</a>
                                 @endif
                         </div>
                         {{--大屏幕时显示--}}

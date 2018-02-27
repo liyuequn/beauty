@@ -16,7 +16,7 @@ class Article extends Model
      * @var string
      */
     protected $table = 'articles';
-    protected $fillable = ['title','content','author_id','type','post_at'];
+    protected $fillable = ['title','content','author_id','type','post_at','wechat_url'];
     /**
      * 不可被批量赋值的属性。
      *
