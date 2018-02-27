@@ -8,8 +8,6 @@ import {
     FormItem,
     Row,
     Col,
-    Carousel,
-    CarouselItem,
     Loading,
     Message,
     DatePicker,
@@ -23,8 +21,6 @@ Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Row)
 Vue.use(Col)
-Vue.use(Carousel)
-Vue.use(CarouselItem)
 Vue.use(DatePicker)
 Vue.use(Select)
 Vue.use(Option)

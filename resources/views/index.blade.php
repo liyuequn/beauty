@@ -1,5 +1,4 @@
 <style>
-    .banner{overflow: hidden;max-height: 300px;}
     .article{overflow:hidden;max-height:500px;width:100%;padding-bottom:25px;padding-top: 17px;background-color: white;border-bottom: 1px solid #f0f0f0;}
     .article-title{color:#333;display: inherit;font-size: 18px;font-weight: 700;line-height: 1.5;}
     .article .abstract{margin-top: 10px;line-height: 24px;overflow:hidden;}
@@ -10,49 +9,11 @@
     .article .col-md-8 {padding: 0;}
     .article .col-md-4 {padding-right: 0;}
     .right-15{margin-right: 15px;}
-    .lunbo{height:230px!important;}
 </style>
 @extends('layouts.app')
 @section('title', 'Index')
 @section('content')
-    <div class="row">
-        <div class="col-md-8">
-            <el-carousel class="lunbo" :interval="5000" arrow="always">
-                <el-carousel-item>
-                    <img width="100%" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1512116377644&di=671380ec5ab6c5795bc3797af929909a&imgtype=0&src=http%3A%2F%2Fimage.tianjimedia.com%2FuploadImages%2F2014%2F340%2F24%2F2EOENARNOWUU_1000x500.jpg" alt="">
-                </el-carousel-item>
-                <el-carousel-item>
-                    <img width="100%" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1512118118295&di=bc8089d9d5ac8c2cb76e2fba760a7cca&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D199734178%2C804954580%26fm%3D214%26gp%3D0.jpg" alt="">
-                </el-carousel-item>
-            </el-carousel>
-        </div>
-        <div class="col-md-4 visible-lg-* hidden-xs  hidden-sm">
-            <div class="panel panel-primary">
-                <div class="panel-heading">推荐资源</div>
-                <div class="panel-body">
-                    @foreach($books as $book)
-                    <a  style="height: inherit"  href="{{$book->path}}">{{$book->name}}</a>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 visible-lg-* hidden-xs  hidden-sm">
-            <div class="panel panel-primary">
-                <div class="panel-heading">热门标签</div>
-                <div class="panel-body" style="line-height: 45px;">
-                    @foreach($labels as $key => $label)
-                        <a   class="btn btn-info btn-sm" style="height: inherit" href="/articles/{{$label->NAME}}">{{$label->NAME}}</a>
-                        @if($key%5 == 4)
-                            <div style="clear: both;">
-                            </div>
-                        @endif
-                    @endforeach
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="row">
+    <div class="row" style="margin-top: 50px;">
         <div class="col-md-8">
             @foreach ($articles as $article)
             <div class="article">
@@ -88,6 +49,26 @@
             <apend></apend>
         </div>
         <div class="col-md-4 visible-lg-* hidden-xs  hidden-sm">
+            <div class="panel panel-primary">
+                <div class="panel-heading">推荐资源</div>
+                <div class="panel-body">
+                    @foreach($books as $book)
+                        <a  style="height: inherit"  href="{{$book->path}}">{{$book->name}}</a>
+                    @endforeach
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">热门标签</div>
+                <div class="panel-body" style="line-height: 45px;">
+                    @foreach($labels as $key => $label)
+                        <a   class="btn btn-info btn-sm" style="height: inherit" href="/articles/{{$label->NAME}}">{{$label->NAME}}</a>
+                        @if($key%5 == 4)
+                            <div style="clear: both;">
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
             <div class="panel panel-primary">
                 <div class="panel-heading">推荐文章</div>
                 <div class="panel-body">
