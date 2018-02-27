@@ -58,7 +58,7 @@
 
 <script>
     import 'simplemde/dist/simplemde.min.css'
-    import SimpleMDE from 'simplemde'
+    import SimpleMDE from 'simplemde/dist/simplemde.min'
     export default {
         name: 'simplemde-md',
         props: {

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="keywords" content="laravel,php,PHP框架,linux,mysql,李岳群的博客">
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" href="{{mix('css/app.css')}}">
     <link rel="icon" href="{{asset('images/icon/Beauty.png')}}" type="image/x-icon"/>
     <title>@yield('title')</title>
     <style>
@@ -88,7 +88,7 @@
                     </div>
                 </div>
         </div>
-        <script src="{{ asset('js/front.js') }}"></script>
+        <script src="{{ mix('js/front.js') }}"></script>
         <script>
             $(document).ready(function(){
                 var wh=$(window).height();
