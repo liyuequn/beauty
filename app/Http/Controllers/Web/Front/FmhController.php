@@ -15,11 +15,10 @@ class FmhController extends Controller
     {
         $client = new Client();
         $crawler = $client->request('GET', $request->input('wechat_url'));
-        $title = $crawler->filter('title')->html();
-        $content = $crawler->filter('.rich_media_content')->html();
+        $content = $crawler->filter('html')->html();
         $content = str_replace('data-src="','src=/image?url=',$content);
 
-        echo ("<h1>$title</h1>".'<div style="text-align: center">'.$content.'</div>');
+        echo $content;
     }
 
 }

@@ -20,6 +20,12 @@ class TestController extends Controller
      */
     public function index(Request $request)
     {
+        $arr = ['name','liyuequn','age',27];
+        $arr1 = [5,6,7,8,9];
+        $new = array_merge($arr1,$arr1);
+
+        var_dump($new);exit;
+
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', 'https://mp.weixin.qq.com/s/1rRSkjXM2tS-lGEsVe-MvA');
         $content = $crawler->filter('.rich_media_content')->html();
