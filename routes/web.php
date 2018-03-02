@@ -37,7 +37,11 @@ Route::get('/article/edit/{id}',function (){
 Route::get('/fmh',function (){
     return view('article.fmh');
 });
+Route::get('/res',function (){
+    return view('article.result');
+});
 Route::post('/fmh','Web\Front\FmhController@index');
+Route::post('/res','Web\Front\FmhController@res');
 Route::get('/image','Web\Backend\ProxyImageController@index');
 Route::get('/reprint',function (){
     return view('article.post',['url'=>'api/v1/reprint']);

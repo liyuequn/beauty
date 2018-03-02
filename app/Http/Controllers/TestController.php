@@ -16,10 +16,59 @@ use Maatwebsite\Excel\Facades\Excel;
 class TestController extends Controller
 {
     /**
-     *
+     * @param $arr
+     * @param $start
+     * @param $end
+     * @return array
+     * 数组切片
      */
+    public function spliceArr($arr,$start,$end){
+        $newArr=[];
+        foreach ($arr as $key => $item){
+            if($key>=$start&&$key<=$end){
+                $newArr[]=$arr[$key];
+            }
+        }
+        return $newArr;
+    }
+
+    /**
+     * @param $arr
+     * @return array
+     * 找出连续子数组中和最大的子数组
+     */
+    public function maxChildrenArr($arr){
+        //1.找出所有的连续子数组
+        //1.1先实现一个切片的函数
+        //1.2弄出所有可能的的 开始索引和结束索引 并以+号连接
+        $len = count($arr);
+        $childrenValues = [];
+        for ($i=0;$i<$len;$i++){
+            for($j=0;$j<$len;$j++){
+                if($j>=$i){
+                    $newArr=$this->spliceArr($arr,$i,$j);
+                    $childrenValues[$i."+".$j] = array_sum($newArr);
+                }
+            }
+        }
+        //2.找出连续子数组的和最大的开始索引和结束索引
+        $newChild = $childrenValues;
+        sort($newChild);
+        $max = array_pop($newChild);
+        //3.猜测最大和可能不止一个，所以定义一个数组容器保存
+        $res = [];
+        foreach ($childrenValues as $key=>$value){
+            if($value==$max){
+                $tmpArr =explode('+',$key);
+                $finalRes[] = $this->spliceArr($arr,$tmpArr[0],$tmpArr[1]);
+            }
+        }
+        return $finalRes;
+    }
+
     public function index(Request $request)
     {
+        $arr = [120,400,390,188,118,150,230,350,250,300,130,290,380,260,280,30,200,100,50];
         $arr = ['name','liyuequn','age',27];
         $arr1 = [5,6,7,8,9];
         $new = array_merge($arr1,$arr1);
