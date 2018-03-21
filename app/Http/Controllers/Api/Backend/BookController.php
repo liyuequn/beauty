@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Api\Backend;
 
 use App\models\Book;
 use App\Http\Controllers\Controller;
